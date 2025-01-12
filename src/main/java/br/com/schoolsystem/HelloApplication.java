@@ -31,10 +31,6 @@ public class HelloApplication extends Application {
         CRUD<Pessoa> pessoaDao = DaoFactory.createPessoaDaoJDBC();
 
         Pessoa pessoa = new Pessoa(null, "João Junio", "R. Marechal Castelo Branco", "Casa", "353", "Centro", "15180000", "joaojunio818@gmail.com", new Date(), "M", "12345678910", "123456789101", "Paramirim(BA)", "Brasil");
-
-        pessoaDao.insert(pessoa);
-        System.out.println("Pessoa inserido com sucesso!");
-        System.out.println(pessoa);
     }
 
     public static Scene getMainScene() { return mainScene; }
