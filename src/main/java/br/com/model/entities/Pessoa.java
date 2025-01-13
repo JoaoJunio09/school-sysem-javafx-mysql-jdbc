@@ -121,7 +121,7 @@ public class Pessoa implements Serializable {
     }
 
     public void setSexo(String sexo) {
-        sexo = sexo;
+        this.sexo = sexo;
     }
 
     public String getCpf() {
