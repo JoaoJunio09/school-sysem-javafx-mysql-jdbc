@@ -18,8 +18,8 @@ public class DB {
             if (props == null) {
                 throw new IllegalStateException("Props was null");
             }
-            String dburl = props.getProperty("dburl");
-            conn = DriverManager.getConnection(dburl, props);
+            String url = props.getProperty("dburl");
+            conn = DriverManager.getConnection(url, props);
         }
         catch (SQLException e) {
             throw new DbException(e.getMessage());

@@ -3,12 +3,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="br.com.controller.MainViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controller.MainViewController">
    <children>
-      <Label layoutX="76.0" layoutY="56.0" text="Test application JavaFX" />
+      <Label layoutX="76.0" layoutY="56.0" text="Test application JavaFX" AnchorPane.bottomAnchor="327.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="402.0" AnchorPane.topAnchor="56.0" />
    </children>
 </AnchorPane>
