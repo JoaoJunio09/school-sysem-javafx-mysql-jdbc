@@ -2,6 +2,8 @@ package br.com.schoolsystem;
 
 import br.com.model.dao.CRUD;
 import br.com.model.dao.DaoFactory;
+import br.com.model.dao.impl.AlunoMatriculaDaoJDBC;
+import br.com.model.entities.AlunoMatricula;
 import br.com.model.entities.Pessoa;
 import br.com.model.entities.Turma;
 import javafx.scene.Scene;
@@ -28,7 +30,8 @@ public class Application extends javafx.application.Application {
 //      stage.show();
 
 //      CRUD<Pessoa> pessoaDao = DaoFactory.createPessoaDaoJDBC();
-        CRUD<Turma> turmaCRUD = DaoFactory.createTurmaDaoJDBC();
+        CRUD<Turma> turmaDao = DaoFactory.createTurmaDaoJDBC();
+        CRUD< AlunoMatricula> alunoMDao = DaoFactory.createAlunoMatriculaDaoJDBC();
 
 
 
