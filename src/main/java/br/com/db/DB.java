@@ -12,7 +12,7 @@ public class DB {
 
     private static Connection conn = null;
 
-    public static Connection getConnectio() {
+    public static Connection getConnection() {
         try {
             Properties props = loadProperties();
             if (props == null) {
