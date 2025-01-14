@@ -1,3 +1,15 @@
 /*
     Por enquanto não à nenhum estilo.
 */
+
+
+
+.title-anchor-pane {
+    -fx-padding: 50px;
+    -fx-background-color: #006dff;
+    -fx-text-fill: #fff;
+}
+
+.title-anchor-pane:hover {
+    -fx-background-color: blue;
+}

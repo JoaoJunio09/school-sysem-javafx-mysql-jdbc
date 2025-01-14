@@ -129,6 +129,11 @@ public class TurmaDaoJDBC implements CRUD<Turma> {
         }
     }
 
+    @Override
+    public List<Turma> search(String query) {
+        return List.of();
+    }
+
     private Turma instantiateTurma(ResultSet rs) throws SQLException {
         Turma obj = new Turma();
         obj.setId(rs.getInt("Id"));
