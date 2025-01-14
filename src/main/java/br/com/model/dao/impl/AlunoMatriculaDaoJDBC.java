@@ -43,9 +43,7 @@ public class AlunoMatriculaDaoJDBC implements CRUD<AlunoMatricula> {
                 }
                 DB.closeResultSet(rs);
             }
-            else {
-                throw new IntegrityDbException("No rows affected");
-            }
+            else throw new IntegrityDbException("No rows affected");
         }
         catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -159,6 +157,11 @@ public class AlunoMatriculaDaoJDBC implements CRUD<AlunoMatricula> {
         finally {
             DB.closeStatement(stmt);
         }
+    }
+
+    @Override
+    public List<AlunoMatricula> search(String query) {
+        return List.of();
     }
 
     private Turma instantiateTurma(ResultSet rs) throws SQLException {

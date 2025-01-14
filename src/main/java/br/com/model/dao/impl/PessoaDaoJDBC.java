@@ -150,6 +150,11 @@ public class PessoaDaoJDBC implements CRUD<Pessoa> {
         }
     }
 
+    @Override
+    public List<Pessoa> search(String query) {
+        return List.of();
+    }
+
     private Pessoa instantiatePessoa(ResultSet rs) throws SQLException {
         Pessoa obj = new Pessoa();
         obj.setId(rs.getInt("Id"));
