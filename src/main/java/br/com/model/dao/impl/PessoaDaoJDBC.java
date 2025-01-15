@@ -11,7 +11,7 @@ import java.util.List;
 
 public class PessoaDaoJDBC implements CRUD<Pessoa> {
 
-    private Connection conn = null;
+    private final Connection conn;
 
     public PessoaDaoJDBC(Connection conn) {
         this.conn = conn;

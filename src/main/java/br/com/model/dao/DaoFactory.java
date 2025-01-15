@@ -1,14 +1,8 @@
 package br.com.model.dao;
 
 import br.com.db.DB;
-import br.com.model.dao.impl.AlunoDaoJDBC;
-import br.com.model.dao.impl.AlunoMatriculaDaoJDBC;
-import br.com.model.dao.impl.PessoaDaoJDBC;
-import br.com.model.dao.impl.TurmaDaoJDBC;
-import br.com.model.entities.Aluno;
-import br.com.model.entities.AlunoMatricula;
-import br.com.model.entities.Pessoa;
-import br.com.model.entities.Turma;
+import br.com.model.dao.impl.*;
+import br.com.model.entities.*;
 
 public class DaoFactory {
 
@@ -25,5 +19,21 @@ public class DaoFactory {
     }
     public static CRUD<Aluno> createAlunoDaoJDBC() {
         return new AlunoDaoJDBC(DB.getConnection());
+    }
+
+    public static CRUD<AlunoContato> createAlunoContatoDaoJDBC() {
+        return new AlunoContatoDaoJDBC(DB.getConnection());
+    }
+
+    public static CRUD<ProfessorMatricula> createProfessorMatriculaDaoJDBC() {
+        return new ProfessorMatriculaDaoJDBC(DB.getConnection());
+    }
+
+    public static CRUD<Professor> createProfessorDaoJDBC() {
+        return new ProfessorDaoJDBC(DB.getConnection());
+    }
+
+    public static CRUD<ProfessorContato> createProfessorContatoDaoJDBC() {
+        return new ProfessorContatoDaoJDBC(DB.getConnection());
     }
 }
