@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchor-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../styles/MainView.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.MainViewController">
-   <children>
-      <Label accessibleRole="BUTTON" layoutX="43.0" layoutY="42.0" prefHeight="141.0" prefWidth="362.0" styleClass="title-anchor-pane" text="Test application JavaFX" AnchorPane.leftAnchor="43.0" AnchorPane.topAnchor="42.0">
-         <font>
-            <Font name="Maiandra GD" size="25.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <DropShadow height="20.27" radius="10.55" width="23.93" />
-         </effect></Label>
-   </children>
-</AnchorPane>
+<AnchorPane id="anchor-pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../styles/MainView.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.MainViewController" />

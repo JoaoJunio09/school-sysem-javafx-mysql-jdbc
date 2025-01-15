@@ -11,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class Application extends javafx.application.Application {
 
@@ -34,6 +36,20 @@ public class Application extends javafx.application.Application {
         CRUD<ProfessorMatricula> profMatriculaDao = DaoFactory.createProfessorMatriculaDaoJDBC();
         CRUD<Professor> profDao = DaoFactory.createProfessorDaoJDBC();
         CRUD<ProfessorContato> profContatoDao = DaoFactory.createProfessorContatoDaoJDBC();
+        CRUD<Disciplina> disciplinaDao = DaoFactory.createDisciplinaDaoJDBC();
+        CRUD<ProfessorDisciplina> profDisciplinaDao = DaoFactory.createProfessorDisciplinaDaoJDBC();
+        CRUD<ProfessorTurma> profTurmaDao = DaoFactory.createProfessorTurmaDaoJDBC();
+        CRUD<Funcionario> funcionarioDao = DaoFactory.createFuncionarioDaoJDBC();
+        CRUD<FuncionarioContato> funcionarioContatoDao = DaoFactory.createFuncionarioContatoDaoJDBC();
+
+        Turma turma = turmaDao.findById(4);
+        Professor professor = profDao.findById(2);
+        Disciplina disciplina = disciplinaDao.findById(4);
+
+//        List<ProfessorDisciplina> list = profDisciplinaDao.findAll()
+//                .stream()
+//                .filter(x -> x.getProfessor().getId().equals(professor.getId()))
+//                .collect(Collectors.toList());
 
     }
 
