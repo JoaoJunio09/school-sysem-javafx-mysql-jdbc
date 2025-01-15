@@ -9,5 +9,6 @@ public interface CRUD<T> {
     void deleteById(int id);
     T findById(int id);
     List<T> findAll();
+
     List<T> search(String query);
 }
