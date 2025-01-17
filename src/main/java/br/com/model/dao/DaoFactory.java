@@ -58,4 +58,8 @@ public class DaoFactory {
     public static CRUD<FuncionarioContato> createFuncionarioContatoDaoJDBC() {
         return new FuncinarioContatoDaoJDBC(DB.getConnection());
     }
+
+    public static CRUD<Usuario> createUsuarioDaoJDBC() {
+        return new UsuarioDaoJDBC(DB.getConnection());
+    }
 }

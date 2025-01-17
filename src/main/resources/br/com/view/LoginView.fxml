@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="400.0" styleClass="pane-background" stylesheets="@../styles/LoginView.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.LoginViewController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="400.0">
+         <children>
+            <ImageView fitHeight="139.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="28.0">
+               <image>
+                  <Image url="@../images/botao-de-login-do-usuario.png" />
+               </image>
+            </ImageView>
+            <Label styleClass="title-login" text="Fazer login" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="88.0">
+               <font>
+                  <Font name="BebasNeue" size="40.0" />
+               </font>
+            </Label>
+            <Line endX="218.0" startX="-100.0" AnchorPane.leftAnchor="40.5" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="180.5" />
+            <VBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="208.0" prefHeight="93.0" prefWidth="320.0" spacing="10.0">
+               <children>
+                  <Label styleClass="label-txt-psw" text="E-mail">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtEmail" prefHeight="50.0" prefWidth="380.0" promptText="example@example.com">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font></TextField>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" layoutX="41.0" layoutY="315.0" prefHeight="111.0" prefWidth="320.0" spacing="10.0">
+               <children>
+                  <Label styleClass="label-txt-psw" text="Senha">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="pswPassword" prefHeight="50.0" promptText="password123">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font></PasswordField>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="441.0" prefHeight="102.0" prefWidth="320.0" spacing="10.0">
+               <children>
+                  <Label styleClass="label-txt-psw" text="Selecione">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="comboBoxTipoUsuario" prefHeight="50.0" prefWidth="347.0" />
+               </children>
+            </VBox>
+            <Button fx:id="btLimpar" layoutX="222.0" layoutY="568.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="139.0" style="-fx-background-color: red;" text="Limpar" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btEntrar" layoutX="41.0" layoutY="568.0" mnemonicParsing="false" onAction="#onBtEntrarAction" prefHeight="50.0" prefWidth="139.0" styleClass="bt-login" text="Entrar" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label fx:id="labelErrorEmail" layoutX="264.0" layoutY="200.0" textFill="RED" />
+            <Label fx:id="labelErrorSenha" layoutX="264.0" layoutY="307.0" textFill="RED" />
+            <Label fx:id="labelErrorComboBox" layoutX="264.0" layoutY="424.0" textFill="RED" />
+            <Label layoutX="40.0" layoutY="419.0" text="Minímo 6 caracteres" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
