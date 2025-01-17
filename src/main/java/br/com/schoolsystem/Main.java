@@ -1,32 +1,37 @@
 package br.com.schoolsystem;
 
+import br.com.controllers.LoginViewController;
 import br.com.model.dao.CRUD;
 import br.com.model.dao.DaoFactory;
-import br.com.model.dao.impl.AlunoMatriculaDaoJDBC;
 import br.com.model.entities.*;
+import br.com.model.services.LoginService;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
-public class Application extends javafx.application.Application {
+public class Main extends javafx.application.Application {
 
     private static Scene mainScene;
 
     @Override
     public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("/br/com/view/MainView.fxml"));
-//        AnchorPane anchorPane = fxmlLoader.load();
-//
-//        mainScene = new Scene(anchorPane);
-//        stage.setTitle("School System - application");
-//        stage.setScene(mainScene);
-//        stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/br/com/view/LoginView.fxml"));
+        Pane paneLogin = fxmlLoader.load();
+
+        LoginViewController controller = fxmlLoader.getController();
+        controller.setEntity(new Usuario());
+        controller.setService(new LoginService());
+        controller.loadAssociateTipoUsuario();
+        controller.updateFormDataLogin();
+
+        Scene loginScene = new Scene(paneLogin);
+        stage.setTitle("School System - application login");
+        stage.setScene(loginScene);
+        stage.setResizable(false);
+        stage.show();
 
         CRUD<Pessoa> pessoaDao = DaoFactory.createPessoaDaoJDBC();
         CRUD<Turma> turmaDao = DaoFactory.createTurmaDaoJDBC();
@@ -54,6 +59,10 @@ public class Application extends javafx.application.Application {
     }
 
     public static Scene getMainScene() { return mainScene; }
+
+    public static void setMainScene(Scene scene) {
+        mainScene = scene;
+    }
 
     public static void main(String[] args) {
         launch();

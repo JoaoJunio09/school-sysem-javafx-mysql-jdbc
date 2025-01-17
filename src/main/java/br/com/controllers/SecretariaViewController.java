@@ -1,0 +1,20 @@
+package br.com.controllers;
+
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class SecretariaViewController implements Initializable {
+
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeNodes();
+    }
+
+    private void initializeNodes() {
+        //
+    }
+}

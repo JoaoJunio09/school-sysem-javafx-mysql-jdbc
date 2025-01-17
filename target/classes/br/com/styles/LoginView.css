@@ -1,0 +1,19 @@
+/*
+    Classe de estilo para a página de login -> LoginView.fxml
+*/
+
+.pane-background {
+    -fx-background-color: linear-gradient(to left bottom, #d50000, #000917);
+}
+
+.title-login {
+    -fx-text-fill: #fff;
+}
+
+.label-txt-psw {
+    -fx-text-fill: #fff;
+}
+
+.bt-login {
+    -fx-background-color: #06af00;
+}

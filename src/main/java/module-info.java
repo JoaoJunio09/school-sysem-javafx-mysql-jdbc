@@ -5,6 +5,7 @@ module br.com.schoolsystem {
 
 
     opens br.com.schoolsystem to javafx.fxml;
+    opens br.com.controllers to javafx.fxml;
     exports br.com.schoolsystem;
     exports br.com.controllers;
 }
