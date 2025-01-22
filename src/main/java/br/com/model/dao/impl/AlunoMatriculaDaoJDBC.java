@@ -167,8 +167,8 @@ public class AlunoMatriculaDaoJDBC implements CRUD<AlunoMatricula> {
     private Turma instantiateTurma(ResultSet rs) throws SQLException {
         Turma obj = new Turma();
         obj.setId(rs.getInt("Turma_id"));
-        obj.setNome(rs.getString("Nome"));
-        obj.setDescricao(rs.getString("Descricao"));
+        obj.setSerie(rs.getString("Serie"));
+        obj.setTurma(rs.getString("Turma"));
         return obj;
     }
 

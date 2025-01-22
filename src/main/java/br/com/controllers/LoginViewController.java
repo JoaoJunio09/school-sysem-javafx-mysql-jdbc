@@ -110,8 +110,9 @@ public class LoginViewController implements Initializable {
             loadViewMain("/br/com/view/MainSecretariaView.fxml", (MainSecretariaViewController controller) -> {
                 controller.setEntityUser(entity);
                 controller.setServices(new AlunoService());
-                controller.updateNumberAlunos();
+//                controller.updateNumberAlunos();
                 controller.updateDataEntityUser();
+                controller.updateTableView();
             }, event);
         }
     }

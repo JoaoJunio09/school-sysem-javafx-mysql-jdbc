@@ -229,8 +229,8 @@ public class AlunoContatoDaoJDBC implements CRUD<AlunoContato> {
     private Turma instantiateTurma(ResultSet rs) throws SQLException {
         Turma obj = new Turma();
         obj.setId(rs.getInt("Turma_id"));
-        obj.setNome(rs.getString("Turma_nome"));
-        obj.setDescricao(rs.getString("Descricao_turma"));
+        obj.setSerie(rs.getString("Turma_nome"));
+        obj.setTurma(rs.getString("Descricao_turma"));
         return obj;
     }
 
