@@ -6,26 +6,16 @@ import java.util.Objects;
 public class ProfessorTurma implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
     private Professor professor;
     private Turma turma;
     private Disciplina disciplina;
 
     public ProfessorTurma() {}
 
-    public ProfessorTurma(Integer id, Professor professor, Turma turma, Disciplina disciplina) {
-        this.id = id;
+    public ProfessorTurma(Professor professor, Turma turma, Disciplina disciplina) {
         this.professor = professor;
         this.turma = turma;
         this.disciplina = disciplina;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Professor getProfessor() {
@@ -40,7 +30,7 @@ public class ProfessorTurma implements Serializable {
         return turma;
     }
 
-    public void setTurma(Turma Turma) {
+    public void setTurma(Turma turma) {
         this.turma = turma;
     }
 
@@ -56,20 +46,20 @@ public class ProfessorTurma implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ProfessorTurma that = (ProfessorTurma) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(professor, that.professor) && Objects.equals(turma, that.turma);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(professor, turma);
     }
 
     @Override
     public String toString() {
         return "ProfessorTurma{" +
-                "id=" + id +
-                ", professor=" + professor +
+                "professor=" + professor +
                 ", turma=" + turma +
+                ", disciplina=" + disciplina +
                 '}';
     }
 }

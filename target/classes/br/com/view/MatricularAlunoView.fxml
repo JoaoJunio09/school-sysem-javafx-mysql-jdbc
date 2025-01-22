@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.MatricularAlunoViewController">
+   <children>
+      <AnchorPane prefHeight="50.0" prefWidth="950.0" style="-fx-background-color: black;">
+         <children>
+            <Label layoutX="14.0" layoutY="17.0" text="Dados - Aluno" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="50.0" prefHeight="582.0" prefWidth="950.0">
+         <children>
+            <Label layoutX="14.0" layoutY="19.0" text="Pessoa" AnchorPane.leftAnchor="14.0">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtIdPessoa" editable="false" layoutX="54.0" layoutY="49.0" prefHeight="30.0" prefWidth="42.0" promptText="AI" />
+            <Label layoutX="14.0" layoutY="55.0" text="Cod" AnchorPane.leftAnchor="14.0">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="114.0" layoutY="55.0" text="Nome">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNomePessoa" layoutX="160.0" layoutY="49.0" prefHeight="30.0" prefWidth="250.0" promptText="nome completo">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="430.0" layoutY="55.0" text="Endereço Residencial">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtEnderecoResPessoa" layoutX="582.0" layoutY="49.0" prefHeight="30.0" prefWidth="355.0" promptText="endereço residencial" AnchorPane.rightAnchor="13.0">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="14.0" layoutY="96.0" text="Complemento" AnchorPane.leftAnchor="14.0">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtComplementoPessoa" layoutX="114.0" layoutY="90.0" prefHeight="30.0" prefWidth="146.0" promptText="casa/apartamento">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="271.0" layoutY="96.0" text="Número">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNumeroPessoa" layoutX="337.0" layoutY="90.0" prefHeight="30.0" prefWidth="75.0" promptText="1234">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="430.0" layoutY="96.0" text="Bairro">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtBairroPessoa" layoutX="484.0" layoutY="90.0" prefHeight="30.0" prefWidth="230.0" promptText="bairro da residência">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="727.0" layoutY="96.0" text="CEP">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtCepPessoa" layoutX="770.0" layoutY="90.0" prefHeight="30.0" prefWidth="168.0" promptText="123456789" AnchorPane.rightAnchor="13.0">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="14.0" layoutY="138.0" text="E-mail">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtEmailPessoa" layoutX="75.0" layoutY="132.0" prefHeight="30.0" prefWidth="299.0" promptText="e-mail pessoal ou profissional">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="387.0" layoutY="138.0" text="Data de nascimento">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="dpDataNascimentoPessoa" layoutX="537.0" layoutY="132.0" prefHeight="30.0" prefWidth="177.0" />
+            <Label layoutX="725.0" layoutY="138.0" text="Sexo">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtSexoPessoa" layoutX="769.0" layoutY="133.0" prefHeight="30.0" prefWidth="168.0" promptText="F / M" AnchorPane.rightAnchor="13.0">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="13.0" layoutY="179.0" text="CPF">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtCpfPessoa" layoutX="56.0" layoutY="173.0" prefHeight="30.0" prefWidth="130.0" promptText="12345678ABC">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="198.0" layoutY="179.0" text="RG">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtRgPessoa" layoutX="229.0" layoutY="174.0" prefHeight="30.0" prefWidth="130.0" promptText="12345678A910ABC">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="367.0" layoutY="181.0" text="Naturalidade">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNaturalidadePessoa" layoutX="460.0" layoutY="174.0" prefHeight="30.0" prefWidth="193.0" promptText="naturalidade">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="14.0" layoutY="225.0" text="Dados Matrícula">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtIdMatricula" editable="false" layoutX="56.0" layoutY="255.0" prefHeight="30.0" prefWidth="42.0" promptText="AI" />
+            <Label layoutX="16.0" layoutY="261.0" text="Cod">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="113.0" layoutY="262.0" text="Cor/raça">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxCorRaca" layoutX="185.0" layoutY="256.0" prefHeight="30.0" prefWidth="219.0" />
+            <Label layoutX="426.0" layoutY="263.0" text="Deficiência">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxDeficiencia" layoutX="508.0" layoutY="257.0" prefHeight="30.0" prefWidth="134.0" />
+            <Label layoutX="664.0" layoutY="264.0" text="Tipo sanguíneo">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxTipoSanguineo" layoutX="775.6" layoutY="256.0" prefHeight="30.0" prefWidth="161.0" AnchorPane.rightAnchor="12.799999999999955" />
+            <Label layoutX="16.0" layoutY="302.0" text="Necessidades especiais">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="txtAreaNecessidadesEspeciais" layoutX="185.0" layoutY="302.0" prefHeight="67.0" prefWidth="382.0" promptText="preencha caso o aluno possua alguma deficiẽncia">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextArea>
+            <Label layoutX="587.0" layoutY="302.0" text="Data matrícula">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="dpDataMatricula" layoutX="693.2" layoutY="296.0" prefHeight="30.0" prefWidth="244.0" AnchorPane.rightAnchor="12.799999999999955" />
+            <Label layoutX="587.0" layoutY="345.0" text="RA">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtRA" disable="true" editable="false" layoutX="693.2" layoutY="339.0" prefHeight="30.0" prefWidth="244.0" promptText="gerar automático" text="example123RA" AnchorPane.rightAnchor="12.799999999999955">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+            <Label layoutX="586.0" layoutY="384.0" text="Turma">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxTurma" layoutX="693.2" layoutY="377.0" prefHeight="30.0" prefWidth="244.0" AnchorPane.rightAnchor="12.799999999999955" />
+            <Button fx:id="btConfirmar" layoutX="791.0" layoutY="507.0" mnemonicParsing="false" onAction="#btConfirmarAction" prefHeight="50.0" prefWidth="145.0" style="-fx-background-color: green;" text="Confirmar" textFill="WHITE">
+               <font>
+                  <Font name="BebasNeue" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btCancelar" layoutX="636.0" layoutY="507.0" mnemonicParsing="false" onAction="#onBtCancelarAction" prefHeight="50.0" prefWidth="145.0" style="-fx-background-color: red;" text="Cancelar" textFill="WHITE">
+               <font>
+                  <Font name="BebasNeue" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="14.0" layoutY="376.0" text="Contato">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtIdContato" editable="false" layoutX="61.0" layoutY="408.0" prefHeight="30.0" prefWidth="42.0" promptText="AI" />
+            <Label layoutX="15.0" layoutY="414.0" text="Cod">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="109.0" layoutY="415.0" text="Descrição">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="110.0" layoutY="492.0" text="Contato">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="txtAreaDescricao" layoutX="183.0" layoutY="416.0" prefHeight="67.0" prefWidth="382.0" promptText="descrição (tipo de contato)">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="txtAreaContato" layoutX="183.0" layoutY="491.0" prefHeight="67.0" prefWidth="382.0" promptText="contato (e-mail, telefone)">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextArea>
+            <Button fx:id="btLimparCampos" layoutX="576.0" layoutY="440.0" mnemonicParsing="false" onAction="#onBtLimparCamposAction" prefHeight="50.0" prefWidth="299.0" text="Limpar campos" AnchorPane.rightAnchor="13.0">
+               <font>
+                  <Font name="BebasNeue" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="666.0" layoutY="181.0" text="Nacionalidade">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNacionalidadePessoa" layoutX="769.0" layoutY="174.0" prefHeight="30.0" prefWidth="168.0" promptText="nacionalidade" AnchorPane.rightAnchor="13.0">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </TextField>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
