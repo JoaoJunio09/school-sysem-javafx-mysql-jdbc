@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
+import java.util.List;
 
 public class Main extends javafx.application.Application {
 
@@ -55,10 +56,11 @@ public class Main extends javafx.application.Application {
 //                .stream()
 //                .filter(x -> x.getProfessor().getId().equals(professor.getId()))
 //                .collect(Collectors.toList());
-
     }
 
-    public static Scene getMainScene() { return mainScene; }
+    public static Scene getMainScene() {
+        return mainScene;
+    }
 
     public static void setMainScene(Scene scene) {
         mainScene = scene;

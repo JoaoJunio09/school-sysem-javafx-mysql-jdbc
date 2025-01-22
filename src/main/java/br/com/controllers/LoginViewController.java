@@ -3,6 +3,7 @@ package br.com.controllers;
 import br.com.exceptions.DbException;
 import br.com.exceptions.ValidationException;
 import br.com.model.entities.Usuario;
+import br.com.model.services.AlunoService;
 import br.com.model.services.LoginService;
 import br.com.schoolsystem.Main;
 import br.com.util.Alerts;
@@ -17,14 +18,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
 public class LoginViewController implements Initializable {
@@ -108,10 +107,19 @@ public class LoginViewController implements Initializable {
             Alerts.showAlert("Erro ao fazer login", null, "Tipo de usuário incorreto", Alert.AlertType.ERROR);
         }
         if (userCorrect == 2) {
-            loadViewMain("/br/com/view/MainView.fxml", (MainViewController controller) -> {
-                // controller
+            loadViewMain("/br/com/view/MainSecretariaView.fxml", (MainSecretariaViewController controller) -> {
+                controller.setEntityUser(entity);
+                controller.setServices(new AlunoService());
+                controller.updateNumberAlunos();
+                controller.updateDataEntityUser();
             }, event);
         }
+    }
+
+    @FXML
+    public void onBtLimparAction() {
+        txtEmail.setText("");
+        pswPassword.setText("");
     }
 
     private Usuario getFormData() {
@@ -196,9 +204,9 @@ public class LoginViewController implements Initializable {
     private <T> void loadViewMain(String absoluteName, Consumer<T> initializing, ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-            AnchorPane anchorPaneMain = loader.load();
+            AnchorPane anchorPane = loader.load();
 
-            Scene mainScene = new Scene(anchorPaneMain);
+            Scene mainScene = new Scene(anchorPane);
             Main.setMainScene(mainScene);
             Stage mainStage = new Stage();
             mainStage.setScene(mainScene);
@@ -211,6 +219,7 @@ public class LoginViewController implements Initializable {
             initializing.accept(controller);
         }
         catch (IOException e) {
+            e.printStackTrace();
             Alerts.showAlert("IO Exception", "Erro ao carregar", e.getMessage(), Alert.AlertType.ERROR);
         }
     }

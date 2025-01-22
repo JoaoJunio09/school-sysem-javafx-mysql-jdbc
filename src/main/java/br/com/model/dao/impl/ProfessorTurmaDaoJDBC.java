@@ -29,16 +29,7 @@ public class ProfessorTurmaDaoJDBC implements CRUD<ProfessorTurma> {
             stmt.setInt(1, obj.getProfessor().getId());
             stmt.setInt(2, obj.getTurma().getId());
             stmt.setInt(3, obj.getDisciplina().getId());
-            int rowsAffected = stmt.executeUpdate();
-
-            if (rowsAffected > 0) {
-                ResultSet rs = stmt.getGeneratedKeys();
-                if (rs.next()) {
-                    obj.setId(rs.getInt(1));
-                }
-                DB.closeResultSet(rs);
-            }
-            else throw new IntegrityDbException("No rows affected");
+            stmt.executeUpdate();
         }
         catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -51,12 +42,12 @@ public class ProfessorTurmaDaoJDBC implements CRUD<ProfessorTurma> {
     @Override
     public void update(ProfessorTurma obj) {
         PreparedStatement stmt = null;
-        String sql = "UPDATE tb_professor_turma SET Id_professor = ?, Id_turma = ? WHERE Id = ?";
+        String sql = "UPDATE tb_professor_turma SET Id_professor = ?, Id_turma = ?, Id_disciplina = ?";
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, obj.getProfessor().getId());
             stmt.setInt(2, obj.getTurma().getId());
-            stmt.setInt(3, obj.getId());
+            stmt.setInt(3, obj.getDisciplina().getId());
             stmt.executeUpdate();
         }
         catch (SQLException e) {
@@ -86,53 +77,23 @@ public class ProfessorTurmaDaoJDBC implements CRUD<ProfessorTurma> {
 
     @Override
     public ProfessorTurma findById(int id) {
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        String sql = "SELECT pd.*, p.*, t.*, pe.*, pm.*, " +
-                "p.Id AS Professor_id, d.Id AS Turma_id, d.Nome AS Turma_nome, pe.Nome AS Pessoa_nome, " +
-                "pe.Id AS Pessoa_id, pm.Id AS Professor_matricula_id " +
-                "FROM tb_professor_turma pd " +
-                "JOIN tb_professor p ON pd.Id_professor = p.Id " +
-                "JOIN tb_pessoa pe ON p.Id_pessoa = pe.Id " +
-                "JOIN tb_professor_matricula pm ON p.Id_professor_matricula = pm.Id " +
-                "JOIN tb_turma t ON pd.Id_turma = t.Id " +
-                "WHERE pd.Id = ?";
-        try {
-            stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                Pessoa pessoa = instantiatePessoa(rs);
-                ProfessorMatricula professorMatricula = instantiateProfessorMatricula(rs);
-                Professor professor = instantiateProfessor(rs, pessoa, professorMatricula);
-                Turma Turma = instantiateTurma(rs);
-                return instantiateProfessorTurma(rs, professor, Turma);
-            }
-
-            return null;
-        }
-        catch (SQLException e) {
-            throw new DbException(e.getMessage());
-        }
-        finally {
-            DB.closeStatement(stmt);
-            DB.closeResultSet(rs);
-        }
+        return null;
     }
 
     @Override
     public List<ProfessorTurma> findAll() {
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String sql = "SELECT pd.*, p.*, t.*, pe.*, pm.*, " +
-                "p.Id AS Professor_id, d.Id AS Turma_id, d.Nome AS Turma_nome, pe.Nome AS Pessoa_nome, " +
-                "pe.Id AS Pessoa_id, pm.Id AS Professor_matricula_id " +
-                "FROM tb_professor_turma pd " +
-                "JOIN tb_professor p ON pd.Id_professor = p.Id " +
+        String sql = "SELECT pt.*, p.*, pe.*, pm.*, t.*, d.*, " +
+                "p.Id AS Professor_id, pe.Id AS Pessoa_id, pe.Nome AS Pessoa_nome, " +
+                "pm.Id AS Professor_matricula_id, t.Id AS Turma_id, t.Nome AS Turma_nome, " +
+                "d.Id AS Disciplina_id, d.Nome AS Disciplina_nome, d.Descricao AS Disciplina_descricao " +
+                "FROM tb_professor_turma pt " +
+                "JOIN tb_professor p ON pt.Id_professor = p.Id " +
                 "JOIN tb_pessoa pe ON p.Id_pessoa = pe.Id " +
                 "JOIN tb_professor_matricula pm ON p.Id_professor_matricula = pm.Id " +
-                "JOIN tb_turma t ON pd.Id_turma = t.Id ";
+                "JOIN tb_turma t ON pt.Id_turma = t.Id " +
+                "JOIN tb_disciplina d ON pt.Id_disciplina = d.Id";
         try {
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -141,6 +102,7 @@ public class ProfessorTurmaDaoJDBC implements CRUD<ProfessorTurma> {
             Map<Integer, ProfessorMatricula> mapProfMatricula = new HashMap<>();
             Map<Integer, Professor> mapProfessor = new HashMap<>();
             Map<Integer, Turma> mapTurma = new HashMap<>();
+            Map<Integer, Disciplina> mapDisciplina = new HashMap<>();
             List<ProfessorTurma> list = new ArrayList<>();
 
             while (rs.next()) {
@@ -168,7 +130,13 @@ public class ProfessorTurmaDaoJDBC implements CRUD<ProfessorTurma> {
                     mapTurma.put(rs.getInt("Id_turma"), Turma);
                 }
 
-                list.add(instantiateProfessorTurma(rs, professor, Turma));
+                Disciplina disciplina = mapDisciplina.get("Id_disciplina");
+                if (disciplina == null) {
+                    disciplina = instantiateDisciplina(rs);
+                    mapDisciplina.put(rs.getInt("Id_disciplina"), disciplina);
+                }
+
+                list.add(instantiateProfessorTurma(rs, professor, Turma, disciplina));
             }
 
             return list;
@@ -187,11 +155,11 @@ public class ProfessorTurmaDaoJDBC implements CRUD<ProfessorTurma> {
         return List.of();
     }
 
-    private ProfessorTurma instantiateProfessorTurma(ResultSet rs, Professor profesor, Turma Turma) throws SQLException {
+    private ProfessorTurma instantiateProfessorTurma(ResultSet rs, Professor profesor, Turma Turma, Disciplina disciplina) throws SQLException {
         ProfessorTurma obj = new ProfessorTurma();
-        obj.setId(rs.getInt("Id"));
-        obj.setTurma(Turma);
         obj.setProfessor(profesor);
+        obj.setTurma(Turma);
+        obj.setDisciplina(disciplina);
         return obj;
     }
 
@@ -236,6 +204,14 @@ public class ProfessorTurmaDaoJDBC implements CRUD<ProfessorTurma> {
         obj.setRg(rs.getString("Rg"));
         obj.setNaturalidade(rs.getString("Naturalidade"));
         obj.setNacionalidade(rs.getString("Nacionalidade"));
+        return obj;
+    }
+
+    private Disciplina instantiateDisciplina(ResultSet rs) throws SQLException {
+        Disciplina obj = new Disciplina();
+        obj.setId(rs.getInt("Disciplina_id"));
+        obj.setNome(rs.getString("Disciplina_nome"));
+        obj.setDescricao(rs.getString("Disciplina_descricao"));
         return obj;
     }
 }
