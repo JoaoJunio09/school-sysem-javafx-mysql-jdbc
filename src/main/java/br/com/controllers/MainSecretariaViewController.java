@@ -7,6 +7,7 @@ import br.com.model.services.*;
 import br.com.schoolsystem.Main;
 import br.com.util.Alerts;
 import br.com.util.Utils;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,7 +32,9 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
 
     private Usuario entityUser;
 
-    private AlunoService service;
+    private AlunoService alunoService;
+
+    private AlunoContatoService alunoContatoService;
 
     @FXML
     private BorderPane borderPaneInicio;
@@ -65,6 +68,9 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
 
     @FXML
     private TableColumn<AlunoDTO, String> tableColumnRA;
+
+    @FXML
+    private TableColumn<AlunoDTO, AlunoDTO> tableColumnDETALHES;
 
     @FXML
     private Label labelUsuario;
@@ -117,7 +123,7 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
     @FXML
     public void onBtMatricularAluno(ActionEvent event) {
         Stage parent = Utils.currentStage(event);
-        createDialogForm("/br/com/view/MatricularAlunoView.fxml", parent);
+        createDialogForm(new Aluno(), new Pessoa(), new AlunoMatricula(), new AlunoContato(), "/br/com/view/MatricularAlunoView.fxml", parent);
     }
 
     @FXML
@@ -138,8 +144,9 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
         this.entityUser = entityUser;
     }
 
-    public void setServices(AlunoService service) {
-        this.service = service;
+    public void setServices(AlunoService alunoService, AlunoContatoService alunoContatoService) {
+        this.alunoService = alunoService;
+        this.alunoContatoService = alunoContatoService;
     }
 
     public void updateDataEntityUser() {
@@ -174,17 +181,17 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
         return valueString;
     }
 
-    private void createDialogForm(String absoluteName, Stage parent) {
+    private void createDialogForm(Aluno objAluno, Pessoa objPessoa, AlunoMatricula objAlunoMatricula, AlunoContato objAlunoContato, String absoluteName, Stage parent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             Pane pane = loader.load();
 
             MatricularAlunoViewController controller = loader.getController();
-            controller.setEntities(new Aluno(), new Pessoa(), new AlunoMatricula(), new AlunoContato());
+            controller.setEntities(objAluno, objPessoa, objAlunoMatricula, objAlunoContato);
             controller.setServices(new AlunoService(), new PessoaService(), new AlunoMatriculaService(), new AlunoContatoService(), new TurmaService());
-            controller.updateFormData();
             controller.setDataChangedListener(this);
             controller.loadAssociatedAllComboBox();
+            controller.updateFormData();
 
             Stage stage = new Stage();
             stage.setScene(new Scene(pane));
@@ -200,26 +207,20 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
     }
 
     public void updateTableView() {
-        if (service == null) {
+        if (alunoService == null) {
             throw new IllegalStateException("Service was null");
         }
 
         List<AlunoDTO> list = new ArrayList<>();
-        for (Aluno aluno : service.findAll()) {
+        for (Aluno aluno : alunoService.findAll()) {
             list.add(new AlunoDTO(aluno, aluno.getAluno_matricula()));
         }
 
         obsList = FXCollections.observableArrayList(list);
         tableViewAluno.setItems(obsList);
-    }
 
-//    public void updateNumberAlunos() {
-//        int counter = 0;
-//        for (Aluno aluno : service.findAll()) {
-//            counter++;
-//        }
-//        labelQuantidadeAlunos.setText(String.valueOf(counter));
-//    }
+        initDetalhesButtons();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -240,6 +241,39 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
         tableColumnSerie.setCellValueFactory(new PropertyValueFactory<>("serie"));
         tableColumnTurma.setCellValueFactory(new PropertyValueFactory<>("turma"));
         tableColumnRA.setCellValueFactory(new PropertyValueFactory<>("RA"));
+    }
+
+    private void exibirDetalhesAluno(AlunoDTO obj, ActionEvent event) {
+        Aluno aluno = new Aluno(obj.getId(), obj.getPessoa(), obj.getAlunoMatricula());
+
+        AlunoContato contato = null;
+
+        List<AlunoContato> list = alunoContatoService.findAll();
+        for (AlunoContato alunoContato : list) {
+            if (alunoContato.getAluno().getId().equals(obj.getId())) {
+                contato = alunoContato;
+            }
+        }
+
+        createDialogForm(aluno, aluno.getPessoa(), aluno.getAluno_matricula(), contato, "/br/com/view/MatricularAlunoView.fxml", Utils.currentStage(event));
+    }
+
+    private void initDetalhesButtons() {
+        tableColumnDETALHES.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        tableColumnDETALHES.setCellFactory(param -> new TableCell<AlunoDTO, AlunoDTO>() {
+            private final Button button = new Button("Detalhes");
+
+            @Override
+            protected void updateItem(AlunoDTO obj, boolean empty) {
+                super.updateItem(obj, empty);
+                if (obj == null) {
+                    setGraphic(null);
+                    return;
+                }
+                setGraphic(button);
+                button.setOnAction(event -> exibirDetalhesAluno(obj, event));
+            }
+        });
     }
 
     @Override

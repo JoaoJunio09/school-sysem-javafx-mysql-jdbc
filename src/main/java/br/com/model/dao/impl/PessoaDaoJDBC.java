@@ -165,7 +165,7 @@ public class PessoaDaoJDBC implements CRUD<Pessoa> {
         obj.setBairro(rs.getString("Bairro"));
         obj.setCep(rs.getString("Cep"));
         obj.setEmail(rs.getString("Email"));
-        obj.setData_nascimento(new java.sql.Date(rs.getDate("Data_nasc").getTime()));
+        obj.setData_nascimento(new java.util.Date(rs.getTimestamp("Data_nasc").getTime()));
         obj.setSexo(rs.getString("Sexo"));
         obj.setCpf(rs.getString("Cpf"));
         obj.setRg(rs.getString("Rg"));

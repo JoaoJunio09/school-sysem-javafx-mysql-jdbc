@@ -91,7 +91,7 @@ public class AlunoContatoDaoJDBC implements CRUD<AlunoContato> {
         ResultSet rs = null;
         String sql = "SELECT ac.*, a.*, p.*, am.*, t.*, " +
                 "p.Id AS Pessoa_id, am.Id AS Aluno_matricula_id, t.Id AS Turma_id, a.Id AS Aluno_id, " +
-                "t.Nome AS Turma_nome, t.Descricao AS Descricao_turma " +
+                "t.Serie AS Turma_nome, t.Turma AS Descricao_turma " +
                 "FROM tb_aluno_contato ac " +
                 "JOIN tb_aluno a ON ac.Id_aluno = a.Id " +
                 "JOIN tb_pessoa p ON a.Id_pessoa = p.Id " +
@@ -129,7 +129,7 @@ public class AlunoContatoDaoJDBC implements CRUD<AlunoContato> {
         ResultSet rs = null;
         String sql = "SELECT ac.*, a.*, p.*, am.*, t.*, " +
                 "p.Id AS Pessoa_id, am.Id AS Aluno_matricula_id, t.Id AS Turma_id, a.Id AS Aluno_id, " +
-                "t.Nome AS Turma_nome, t.Descricao AS Descricao_turma " +
+                "t.Serie AS Turma_nome, t.Turma AS Descricao_turma " +
                 "FROM tb_aluno_contato ac " +
                 "JOIN tb_aluno a ON ac.Id_aluno = a.Id " +
                 "JOIN tb_pessoa p ON a.Id_pessoa = p.Id " +

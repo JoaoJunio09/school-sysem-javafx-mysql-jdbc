@@ -1,5 +1,6 @@
 package br.com.model.services;
 
+import br.com.exceptions.UserAlreadyExists;
 import br.com.model.dao.CRUD;
 import br.com.model.dao.DaoFactory;
 import br.com.model.entities.Aluno;

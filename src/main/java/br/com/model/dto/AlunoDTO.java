@@ -2,6 +2,7 @@ package br.com.model.dto;
 
 import br.com.model.entities.Aluno;
 import br.com.model.entities.AlunoMatricula;
+import br.com.model.entities.Pessoa;
 
 import java.util.Objects;
 
@@ -16,6 +17,9 @@ public class AlunoDTO {
     private String turma;
     private String RA;
 
+    private Pessoa pessoa;
+    private AlunoMatricula alunoMatricula;
+
     public AlunoDTO() {}
 
     public AlunoDTO(Aluno aluno, AlunoMatricula alunoMatricula) {
@@ -27,6 +31,9 @@ public class AlunoDTO {
         this.serie = alunoMatricula.getTurma().getSerie();
         this.turma = alunoMatricula.getTurma().getTurma();
         this.RA = alunoMatricula.getRA();
+
+        this.pessoa = aluno.getPessoa();
+        this.alunoMatricula = alunoMatricula;
     }
 
     public Integer getId() {
@@ -91,6 +98,14 @@ public class AlunoDTO {
 
     public void setRA(String RA) {
         this.RA = RA;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public AlunoMatricula getAlunoMatricula() {
+        return alunoMatricula;
     }
 
     @Override
