@@ -7,16 +7,16 @@ public class Turma implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-    private String nome;
-    private String descricao;
+    private String serie;
+    private String turma;
 
     public Turma() {
     }
 
-    public Turma(Integer id, String nome, String descricao) {
+    public Turma(Integer id, String serie, String turma) {
         this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
+        this.serie = serie;
+        this.turma = turma;
     }
 
     public Integer getId() {
@@ -27,20 +27,20 @@ public class Turma implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getSerie() {
+        return serie;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setSerie(String serie) {
+        this.serie = serie;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getTurma() {
+        return turma;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setTurma(String descricao) {
+        this.turma = descricao;
     }
 
     @Override
@@ -57,6 +57,6 @@ public class Turma implements Serializable {
 
     @Override
     public String toString() {
-        return nome + " " + descricao;
+        return serie + " " + turma;
     }
 }

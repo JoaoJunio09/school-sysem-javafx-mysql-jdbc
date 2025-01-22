@@ -2,6 +2,7 @@ package br.com.controllers;
 
 import br.com.exceptions.DbException;
 import br.com.exceptions.ValidationException;
+import br.com.listeners.DataChangedListener;
 import br.com.model.entities.*;
 import br.com.model.services.*;
 import br.com.util.Alerts;
@@ -142,6 +143,7 @@ public class MatricularAlunoViewController implements Initializable {
             alunoService.saveOrUpdate(entityAluno);
             entityAlunoContato = getFormDataContato();
             alunoContatoService.saveOrUpdate(entityAlunoContato);
+            notifyDataChangedListener();
 
             Alerts.showAlert("Concluido", null, "Aluno salvo com sucesso", Alert.AlertType.INFORMATION);
             Utils.currentStage(event).close();
@@ -197,6 +199,8 @@ public class MatricularAlunoViewController implements Initializable {
 
     private ObservableList<String> obsListTipoSanguineo;
 
+    private List<DataChangedListener> dataChangedListeners = new ArrayList<>();
+
     public void setEntities(Aluno alunoEntity, Pessoa pessoaEntity, AlunoMatricula alunoMatriculaEntity,
                             AlunoContato alunoContatoEntity
     ) {
@@ -214,6 +218,10 @@ public class MatricularAlunoViewController implements Initializable {
         this.alunoMatriculaService = alunoMatriculaService;
         this.alunoContatoService = alunoContatoService;
         this.turmaService = turmaService;
+    }
+
+    public void setDataChangedListener(DataChangedListener dataChangedListener) {
+        this.dataChangedListeners.add(dataChangedListener);
     }
 
     private Aluno getFormDataAluno() {
@@ -398,6 +406,12 @@ public class MatricularAlunoViewController implements Initializable {
 
         if (field.contains("errors")) {
             Alerts.showAlert("Erro ao salvar", null, errors.get("errors"), Alert.AlertType.ERROR);
+        }
+    }
+
+    private void notifyDataChangedListener() {
+        for (DataChangedListener listener : dataChangedListeners) {
+            listener.onDataChangedListener();
         }
     }
 

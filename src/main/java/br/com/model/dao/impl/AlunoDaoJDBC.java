@@ -128,7 +128,7 @@ public class AlunoDaoJDBC implements CRUD<Aluno> {
         ResultSet rs = null;
         String sql = "SELECT a.*, p.*, am.*, t.*, " +
                 "p.Id AS Pessoa_id, am.Id AS Aluno_matricula_id, t.Id AS Turma_id, " +
-                "t.Nome AS Turma_nome " +
+                "t.Serie AS Turma_nome " +
                 "FROM tb_aluno a " +
                 "JOIN tb_pessoa p ON a.Id_pessoa = p.Id " +
                 "JOIN tb_aluno_matricula am ON a.Id_aluno_matricula = am.Id " +
@@ -212,8 +212,8 @@ public class AlunoDaoJDBC implements CRUD<Aluno> {
     private Turma instantiateTurma(ResultSet rs) throws SQLException {
         Turma obj = new Turma();
         obj.setId(rs.getInt("Turma_id"));
-        obj.setNome(rs.getString("Turma_nome"));
-        obj.setDescricao(rs.getString("Descricao"));
+        obj.setSerie(rs.getString("Turma_nome"));
+        obj.setTurma(rs.getString("Turma"));
         return obj;
     }
 

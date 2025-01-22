@@ -1,30 +1,33 @@
 package br.com.controllers;
 
+import br.com.listeners.DataChangedListener;
+import br.com.model.dto.AlunoDTO;
 import br.com.model.entities.*;
 import br.com.model.services.*;
 import br.com.schoolsystem.Main;
 import br.com.util.Alerts;
 import br.com.util.Utils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
-public class MainSecretariaViewController implements Initializable {
+public class MainSecretariaViewController implements Initializable, DataChangedListener {
 
     private Usuario entityUser;
 
@@ -35,6 +38,33 @@ public class MainSecretariaViewController implements Initializable {
 
     @FXML
     private BorderPane borderPaneAluno;
+
+    @FXML
+    private TableView<AlunoDTO> tableViewAluno;
+
+    @FXML
+    private TableColumn<AlunoDTO, Integer> tableColumnId;
+
+    @FXML
+    private TableColumn<AlunoDTO, String> tableColumnNome;
+
+    @FXML
+    private TableColumn<AlunoDTO, String> tableColumnEmail;
+
+    @FXML
+    private TableColumn<AlunoDTO, String> tableColumnRG;
+
+    @FXML
+    private TableColumn<AlunoDTO, String> tableColumnSexo;
+
+    @FXML
+    private TableColumn<AlunoDTO, String> tableColumnSerie;
+
+    @FXML
+    private TableColumn<AlunoDTO, String> tableColumnTurma;
+
+    @FXML
+    private TableColumn<AlunoDTO, String> tableColumnRA;
 
     @FXML
     private Label labelUsuario;
@@ -76,6 +106,9 @@ public class MainSecretariaViewController implements Initializable {
     private ScrollPane scrollPaneRecentes;
 
     @FXML
+    private ScrollPane scrollPaneTableView;
+
+    @FXML
     private VBox VBoxScrollPaneRecentes;
 
     @FXML
@@ -98,6 +131,8 @@ public class MainSecretariaViewController implements Initializable {
             borderPaneAluno.setVisible(true);
         }
     }
+
+    private ObservableList<AlunoDTO> obsList;
 
     public void setEntityUser(Usuario entityUser) {
         this.entityUser = entityUser;
@@ -148,6 +183,7 @@ public class MainSecretariaViewController implements Initializable {
             controller.setEntities(new Aluno(), new Pessoa(), new AlunoMatricula(), new AlunoContato());
             controller.setServices(new AlunoService(), new PessoaService(), new AlunoMatriculaService(), new AlunoContatoService(), new TurmaService());
             controller.updateFormData();
+            controller.setDataChangedListener(this);
             controller.loadAssociatedAllComboBox();
 
             Stage stage = new Stage();
@@ -163,6 +199,28 @@ public class MainSecretariaViewController implements Initializable {
         }
     }
 
+    public void updateTableView() {
+        if (service == null) {
+            throw new IllegalStateException("Service was null");
+        }
+
+        List<AlunoDTO> list = new ArrayList<>();
+        for (Aluno aluno : service.findAll()) {
+            list.add(new AlunoDTO(aluno, aluno.getAluno_matricula()));
+        }
+
+        obsList = FXCollections.observableArrayList(list);
+        tableViewAluno.setItems(obsList);
+    }
+
+//    public void updateNumberAlunos() {
+//        int counter = 0;
+//        for (Aluno aluno : service.findAll()) {
+//            counter++;
+//        }
+//        labelQuantidadeAlunos.setText(String.valueOf(counter));
+//    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeNodes();
@@ -173,13 +231,19 @@ public class MainSecretariaViewController implements Initializable {
         borderPaneAluno.setVisible(false);
 
         VBoxScrollPaneRecentes.prefWidthProperty().bind(scrollPaneRecentes.widthProperty());
+
+        tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        tableColumnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        tableColumnRG.setCellValueFactory(new PropertyValueFactory<>("rg"));
+        tableColumnSexo.setCellValueFactory(new PropertyValueFactory<>("sexo"));
+        tableColumnSerie.setCellValueFactory(new PropertyValueFactory<>("serie"));
+        tableColumnTurma.setCellValueFactory(new PropertyValueFactory<>("turma"));
+        tableColumnRA.setCellValueFactory(new PropertyValueFactory<>("RA"));
     }
 
-    public void updateNumberAlunos() {
-        int counter = 0;
-        for (Aluno aluno : service.findAll()) {
-            counter++;
-        }
-        labelQuantidadeAlunos.setText(String.valueOf(counter));
+    @Override
+    public void onDataChangedListener() {
+        updateTableView();
     }
 }

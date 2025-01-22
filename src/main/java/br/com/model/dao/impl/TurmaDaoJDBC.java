@@ -21,12 +21,12 @@ public class TurmaDaoJDBC implements CRUD<Turma> {
     @Override
     public void insert(Turma obj) {
         PreparedStatement stmt = null;
-        String sql = "INSERT INTO tb_turma (Nome, Descricao) VALUES (?, ?)";
+        String sql = "INSERT INTO tb_turma (Serie, Turma) VALUES (?, ?)";
         try {
             stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            stmt.setString(1, obj.getNome());
-            stmt.setString(2, obj.getDescricao());
+            stmt.setString(1, obj.getSerie());
+            stmt.setString(2, obj.getTurma());
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
                 ResultSet rs = stmt.getGeneratedKeys();
@@ -50,10 +50,10 @@ public class TurmaDaoJDBC implements CRUD<Turma> {
     public void update(Turma obj) {
         PreparedStatement stmt = null;
         try {
-            stmt = conn.prepareStatement("UPDATE tb_turma SET Id = ?, Nome = ?, Descricao = ? WHERE Id = ?");
+            stmt = conn.prepareStatement("UPDATE tb_turma SET Id = ?, Serie = ?, Turma = ? WHERE Id = ?");
             stmt.setInt(1, obj.getId());
-            stmt.setString(2, obj.getNome());
-            stmt.setString(3, obj.getDescricao());
+            stmt.setString(2, obj.getSerie());
+            stmt.setString(3, obj.getTurma());
             stmt.setInt(4, obj.getId());
             stmt.executeUpdate();
         }
@@ -135,8 +135,8 @@ public class TurmaDaoJDBC implements CRUD<Turma> {
     private Turma instantiateTurma(ResultSet rs) throws SQLException {
         Turma obj = new Turma();
         obj.setId(rs.getInt("Id"));
-        obj.setNome(rs.getString("Nome"));
-        obj.setDescricao(rs.getString("Descricao"));
+        obj.setSerie(rs.getString("Serie"));
+        obj.setTurma(rs.getString("Turma"));
         return obj;
     }
 }
