@@ -1,6 +1,7 @@
 package br.com.controllers;
 
 import br.com.exceptions.DbException;
+import br.com.exceptions.UserAlreadyExists;
 import br.com.exceptions.ValidationException;
 import br.com.listeners.DataChangedListener;
 import br.com.model.entities.*;
@@ -128,7 +129,7 @@ public class MatricularAlunoViewController implements Initializable {
 
     @FXML
     public void btConfirmarAction(ActionEvent event) {
-        if (entityAluno == null || entityPessoa == null || entityAlunoMatricula == null || entityAlunoContato == null) {
+        if (entityAluno == null|| entityAlunoContato == null) {
             throw new IllegalStateException("Entities was null");
         }
         if (alunoService == null) {
@@ -147,6 +148,9 @@ public class MatricularAlunoViewController implements Initializable {
 
             Alerts.showAlert("Concluido", null, "Aluno salvo com sucesso", Alert.AlertType.INFORMATION);
             Utils.currentStage(event).close();
+        }
+        catch (UserAlreadyExists e) {
+            Alerts.showAlert("Erro ao salvar", null, e.getMessage(), Alert.AlertType.ERROR);
         }
         catch (ValidationException e) {
             setMessageErrors(e.getErrors());
@@ -281,6 +285,12 @@ public class MatricularAlunoViewController implements Initializable {
             throw exception;
         }
 
+        for (Pessoa pessoa : pessoaService.findAll()) {
+            if (pessoa.getCpf().equals(obj.getCpf()) || pessoa.getRg().equals(obj.getRg())) {
+                throw new UserAlreadyExists("Essa pessoa já existe");
+            }
+        }
+
         return obj;
     }
 
@@ -350,7 +360,10 @@ public class MatricularAlunoViewController implements Initializable {
             throw new IllegalStateException("Entities was null");
         }
 
-        txtIdPessoa.setText(String.valueOf(entityPessoa.getId()));
+        boolean userExiting = false;
+        if (entityAluno.getId() != null) userExiting = true;
+        editableFieldsForm(userExiting);
+
         txtNomePessoa.setText(entityPessoa.getNome());
         txtEnderecoResPessoa.setText(entityPessoa.getEndereco_res());
         txtComplementoPessoa.setText(entityPessoa.getComplemento());
@@ -396,9 +409,39 @@ public class MatricularAlunoViewController implements Initializable {
         else {
             comboBoxTurma.setValue(entityAlunoMatricula.getTurma());
         }
-        txtIdContato.setText(String.valueOf(entityAluno.getId()));
+
+        txtIdContato.setText(String.valueOf(entityAlunoContato.getId()));
         txtAreaDescricao.setText(entityAlunoContato.getDescricao());
         txtAreaContato.setText(entityAlunoContato.getContato());
+    }
+
+    private void editableFieldsForm(boolean userExiting) {
+        if (userExiting) {
+            btLimparCampos.setDisable(Boolean.TRUE);
+            btConfirmar.setDisable(Boolean.TRUE);
+
+            txtNomePessoa.setEditable(false);
+            txtEnderecoResPessoa.setEditable(false);
+            txtComplementoPessoa.setEditable(false);
+            txtNumeroPessoa.setEditable(false);
+            txtBairroPessoa.setEditable(false);
+            txtCepPessoa.setEditable(false);
+            txtEmailPessoa.setEditable(false);
+            dpDataNascimentoPessoa.setEditable(false);
+            txtSexoPessoa.setEditable(false);
+            txtCpfPessoa.setEditable(false);
+            txtRgPessoa.setEditable(false);
+            txtNaturalidadePessoa.setEditable(false);
+            txtNacionalidadePessoa.setEditable(false);
+            comboBoxCorRaca.setEditable(false);
+            comboBoxDeficiencia.setEditable(false);
+            comboBoxTipoSanguineo.setEditable(false);
+            txtAreaNecessidadesEspeciais.setEditable(false);
+            dpDataMatricula.setEditable(false);
+            comboBoxTurma.setEditable(false);
+            txtAreaDescricao.setEditable(false);
+            txtAreaContato.setEditable(false);
+        }
     }
 
     private void setMessageErrors(Map<String, String> errors) {
@@ -424,6 +467,9 @@ public class MatricularAlunoViewController implements Initializable {
         Constraints.setTextFieldInteger(txtIdPessoa);
         Constraints.setTextFieldInteger(txtIdMatricula);
         Constraints.setTextFieldInteger(txtIdContato);
+
+        Utils.formatDatePicker(dpDataNascimentoPessoa, "dd/MM/yyyy");
+        Utils.formatDatePicker(dpDataMatricula, "dd/MM/yyyy");
 
         initializeComboBoxCorRaca();
         initializeComboBoxDeficiencia();

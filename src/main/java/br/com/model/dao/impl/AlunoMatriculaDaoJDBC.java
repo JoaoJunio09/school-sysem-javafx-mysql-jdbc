@@ -180,7 +180,7 @@ public class AlunoMatriculaDaoJDBC implements CRUD<AlunoMatricula> {
         obj.setDeficiencia(rs.getString("Deficiencia"));
         obj.setTipo_sanguineo(rs.getString("Tipo_sanguineo"));
         obj.setNecessidades_especiais(rs.getString("Nece_especiais"));
-        obj.setData_matricula(new java.sql.Date(rs.getDate("Data_matricula").getTime()));
+        obj.setData_matricula(new java.util.Date(rs.getTimestamp("Data_matricula").getTime()));
         obj.setRA(rs.getString("RA"));
         return obj;
     }

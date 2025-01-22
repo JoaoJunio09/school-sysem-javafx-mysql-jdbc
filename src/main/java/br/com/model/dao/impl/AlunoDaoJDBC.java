@@ -200,7 +200,7 @@ public class AlunoDaoJDBC implements CRUD<Aluno> {
         obj.setBairro(rs.getString("Bairro"));
         obj.setCep(rs.getString("Cep"));
         obj.setEmail(rs.getString("Email"));
-        obj.setData_nascimento(rs.getDate("Data_nasc"));
+        obj.setData_nascimento(new java.util.Date(rs.getTimestamp("Data_nasc").getTime()));
         obj.setSexo(rs.getString("Sexo"));
         obj.setCpf(rs.getString("Cpf"));
         obj.setRg(rs.getString("Rg"));
@@ -225,7 +225,7 @@ public class AlunoDaoJDBC implements CRUD<Aluno> {
         obj.setDeficiencia(rs.getString("Deficiencia"));
         obj.setTipo_sanguineo(rs.getString("Tipo_sanguineo"));
         obj.setNecessidades_especiais(rs.getString("Nece_especiais"));
-        obj.setData_matricula(rs.getDate("Data_matricula"));
+        obj.setData_matricula(new java.util.Date(rs.getTimestamp("Data_matricula").getTime()));
         obj.setRA(rs.getString("RA"));
         return obj;
     }

@@ -1,5 +1,7 @@
 package br.com.model.entities;
 
+import br.com.model.dto.AlunoDTO;
+
 import java.io.Serializable;
 import java.util.Objects;
 
