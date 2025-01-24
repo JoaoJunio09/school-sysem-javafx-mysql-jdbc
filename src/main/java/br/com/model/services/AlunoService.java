@@ -23,4 +23,12 @@ public class AlunoService {
     public List<Aluno> findAll() {
         return dao.findAll();
     }
+
+    public Aluno findById(Integer id) {
+        return dao.findById(id);
+    }
+
+    public List<Aluno> search(String query) {
+        return dao.search(query);
+    }
 }

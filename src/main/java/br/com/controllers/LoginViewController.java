@@ -6,6 +6,7 @@ import br.com.model.entities.Usuario;
 import br.com.model.services.AlunoContatoService;
 import br.com.model.services.AlunoService;
 import br.com.model.services.LoginService;
+import br.com.model.services.TurmaService;
 import br.com.schoolsystem.Main;
 import br.com.util.Alerts;
 import br.com.util.Constraints;
@@ -110,7 +111,7 @@ public class LoginViewController implements Initializable {
         if (userCorrect == 2) {
             loadViewMain("/br/com/view/MainSecretariaView.fxml", (MainSecretariaViewController controller) -> {
                 controller.setEntityUser(entity);
-                controller.setServices(new AlunoService(), new AlunoContatoService());
+                controller.setServices(new AlunoService(), new AlunoContatoService(), new TurmaService());
 //                controller.updateNumberAlunos();
                 controller.updateDataEntityUser();
                 controller.updateTableView();

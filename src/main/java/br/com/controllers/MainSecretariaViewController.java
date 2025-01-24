@@ -1,5 +1,6 @@
 package br.com.controllers;
 
+import br.com.exceptions.DbException;
 import br.com.listeners.DataChangedListener;
 import br.com.model.dto.AlunoDTO;
 import br.com.model.entities.*;
@@ -20,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,11 +38,25 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
 
     private AlunoContatoService alunoContatoService;
 
+    private TurmaService turmaService;
+
     @FXML
     private BorderPane borderPaneInicio;
 
     @FXML
     private BorderPane borderPaneAluno;
+
+    @FXML
+    private TextField txtBuscaPorNome;
+
+    @FXML
+    private TextField txtBuscaPorRa;
+
+    @FXML
+    private Button btBuscarAluno;
+
+    @FXML
+    private Button btListarTodosAlunos;
 
     @FXML
     private TableView<AlunoDTO> tableViewAluno;
@@ -112,18 +128,70 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
     private ScrollPane scrollPaneRecentes;
 
     @FXML
-    private ScrollPane scrollPaneTableView;
-
-    @FXML
     private VBox VBoxScrollPaneRecentes;
 
     @FXML
     private Label labelQuantidadeAlunos;
 
     @FXML
-    public void onBtMatricularAluno(ActionEvent event) {
+    public void onBtMatricularAlunoAction(ActionEvent event) {
         Stage parent = Utils.currentStage(event);
         createDialogForm(new Aluno(), new Pessoa(), new AlunoMatricula(), new AlunoContato(), "/br/com/view/MatricularAlunoView.fxml", parent);
+    }
+
+    @FXML
+    public void onBtBuscarAlunoAction(ActionEvent event) {
+        try {
+            String query = generateQuerySearch();
+            updateTableViewSeach(query);
+        }
+        catch (DbException e) {
+            Alerts.showAlert("Erro com acessar os dados", null, "Preencha os campos", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void updateTableViewSeach(String query) {
+        if (alunoService == null) {
+            throw new IllegalStateException("Aluno service was null");
+        }
+
+        List<AlunoDTO> list = new ArrayList<>();
+
+        for (Aluno aluno : alunoService.search(query)) {
+            list.add(new AlunoDTO(aluno, aluno.getAluno_matricula()));
+        }
+
+        obsList = FXCollections.observableList(list);
+        tableViewAluno.setItems(obsList);
+    }
+
+    private String generateQuerySearch() {
+        String query = "";
+        int counter = 0;
+
+        if (!txtBuscaPorNome.getText().trim().equals("")) {
+            if (counter == 0) query += "p.Nome LIKE '" + txtBuscaPorNome.getText() + "%'";
+            else query += " OR p.Nome LIKE '" + txtBuscaPorNome.getText() + "%'";
+            counter++;
+        }
+
+        if (!txtBuscaPorRa.getText().trim().equals("")) {
+            if (counter == 0) query += "am.RA LIKE '" + txtBuscaPorRa.getText() + "%'";
+            else query += " OR am.RA LIKE '" + txtBuscaPorRa.getText() + "%'";
+            counter++;
+        }
+
+        return query;
+    }
+
+    @FXML
+    public void onBtListarTodosAlunosAction(ActionEvent event) {
+        try {
+            updateTableView();
+        }
+        catch (DbException e) {
+            Alerts.showAlert("Erro ao acessar os dados", null, e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -144,9 +212,10 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
         this.entityUser = entityUser;
     }
 
-    public void setServices(AlunoService alunoService, AlunoContatoService alunoContatoService) {
+    public void setServices(AlunoService alunoService, AlunoContatoService alunoContatoService, TurmaService turmaService) {
         this.alunoService = alunoService;
         this.alunoContatoService = alunoContatoService;
+        this.turmaService = turmaService;
     }
 
     public void updateDataEntityUser() {
