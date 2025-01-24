@@ -364,6 +364,7 @@ public class MatricularAlunoViewController implements Initializable {
         if (entityAluno.getId() != null) userExiting = true;
         editableFieldsForm(userExiting);
 
+        txtIdPessoa.setText(String.valueOf(entityPessoa.getId()));
         txtNomePessoa.setText(entityPessoa.getNome());
         txtEnderecoResPessoa.setText(entityPessoa.getEndereco_res());
         txtComplementoPessoa.setText(entityPessoa.getComplemento());

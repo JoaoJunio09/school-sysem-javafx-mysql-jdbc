@@ -179,7 +179,61 @@ public class AlunoDaoJDBC implements CRUD<Aluno> {
 
     @Override
     public List<Aluno> search(String query) {
-        return List.of();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String sql = new StringBuilder()
+                .append("SELECT a.*, p.*, am.*, t.*, ")
+                .append("p.Id AS Pessoa_id, am.Id AS Aluno_matricula_id, t.Id AS Turma_id, ")
+                .append("t.Serie AS Turma_nome ")
+                .append("FROM tb_aluno a ")
+                .append("JOIN tb_pessoa p ON a.Id_pessoa = p.Id ")
+                .append("JOIN tb_aluno_matricula am ON a.Id_aluno_matricula = am.Id ")
+                .append("JOIN tb_turma t ON am.Id_turma = t.Id ")
+                .append("WHERE ")
+                .append(query)
+                .toString();
+        try {
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            Map<Integer, Turma> mapTurma = new HashMap<>();
+            Map<Integer, Pessoa> mapPessoa = new HashMap<>();
+            Map<Integer, AlunoMatricula> mapAlunoMatricula = new HashMap<>();
+            List<Aluno> list = new ArrayList<>();
+
+            while (rs.next()) {
+
+                Turma turma = mapTurma.get("Id_turma");
+                if (turma == null) {
+                    turma = instantiateTurma(rs);
+                    mapTurma.put(rs.getInt("Id_turma"), turma);
+                }
+
+                Pessoa pessoa = mapPessoa.get("Id_pessoa");
+                if (pessoa == null) {
+                    pessoa = instantiatePessoa(rs);
+                    mapPessoa.put(rs.getInt("Id_pessoa"), pessoa);
+                }
+
+                AlunoMatricula aluno_matricula = mapAlunoMatricula.get("Id_aluno_matricula");
+                if (aluno_matricula == null) {
+                    aluno_matricula = instantiateAlunoMatricula(rs, turma);
+                    mapAlunoMatricula.put(rs.getInt("Id_aluno_matricula"), aluno_matricula);
+                }
+
+                Aluno obj = instantiateAluno(rs, pessoa, aluno_matricula);
+                list.add(instantiateAluno(rs, pessoa, aluno_matricula));
+            }
+
+            return list;
+        }
+        catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(stmt);
+            DB.closeResultSet(rs);
+        }
     }
 
     private Aluno instantiateAluno(ResultSet rs, Pessoa pessoa, AlunoMatricula aluno_matricula) throws SQLException {
