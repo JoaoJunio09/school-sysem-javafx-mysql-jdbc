@@ -18,10 +18,8 @@ public class PessoaService {
         }
     }
 
-    public void deleteById(Pessoa obj) {
-        if (obj == null) throw new IllegalStateException("Obj was null");
-
-        dao.deleteById(obj.getId());
+    public void deleteById(Integer id) {
+        dao.deleteById(id);
     }
 
     public Pessoa findById(Pessoa obj) {

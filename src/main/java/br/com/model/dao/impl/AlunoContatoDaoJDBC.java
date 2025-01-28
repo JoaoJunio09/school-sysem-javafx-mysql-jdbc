@@ -71,7 +71,7 @@ public class AlunoContatoDaoJDBC implements CRUD<AlunoContato> {
     @Override
     public void deleteById(int id) {
         PreparedStatement stmt = null;
-        String sql = "DELETE FROM tb_aluno_contato WHERE Id = ?";
+        String sql = "DELETE FROM tb_aluno_contato WHERE Id_Aluno = ?";
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);

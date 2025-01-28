@@ -16,4 +16,8 @@ public class AlunoMatriculaService {
             dao.update(obj);
         }
     }
+
+    public void deleteById(Integer id) {
+        dao.deleteById(id);
+    }
 }

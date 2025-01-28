@@ -72,7 +72,7 @@ public class AlunoDaoJDBC implements CRUD<Aluno> {
     @Override
     public void deleteById(int id) {
         PreparedStatement stmt = null;
-        String sql = "DELETE FROM tb_aluno WHERE Id = ?";
+        String sql = "DELETE FROM tb_aluno WHERE Id_Pessoa = ?";
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);

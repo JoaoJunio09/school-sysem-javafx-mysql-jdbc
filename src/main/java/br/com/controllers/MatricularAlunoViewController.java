@@ -4,6 +4,7 @@ import br.com.exceptions.DbException;
 import br.com.exceptions.UserAlreadyExists;
 import br.com.exceptions.ValidationException;
 import br.com.listeners.DataChangedListener;
+import br.com.listeners.MonitorsRecentNew;
 import br.com.model.entities.*;
 import br.com.model.services.*;
 import br.com.util.Alerts;
@@ -146,6 +147,8 @@ public class MatricularAlunoViewController implements Initializable {
             alunoContatoService.saveOrUpdate(entityAlunoContato);
             notifyDataChangedListener();
 
+            notifyMonitorRecentNew("Aluno " + entityPessoa.getNome() + " matriculado/alterado, Série: " + entityAlunoMatricula.getTurma().getSerie() + " " + entityAlunoMatricula.getTurma().getTurma());
+
             Alerts.showAlert("Concluido", null, "Aluno salvo com sucesso", Alert.AlertType.INFORMATION);
             Utils.currentStage(event).close();
         }
@@ -205,6 +208,8 @@ public class MatricularAlunoViewController implements Initializable {
 
     private List<DataChangedListener> dataChangedListeners = new ArrayList<>();
 
+    private List<MonitorsRecentNew> monitorsRecentNews = new ArrayList<>();
+
     public void setEntities(Aluno alunoEntity, Pessoa pessoaEntity, AlunoMatricula alunoMatriculaEntity,
                             AlunoContato alunoContatoEntity
     ) {
@@ -226,6 +231,10 @@ public class MatricularAlunoViewController implements Initializable {
 
     public void setDataChangedListener(DataChangedListener dataChangedListener) {
         this.dataChangedListeners.add(dataChangedListener);
+    }
+
+    public void setMonitorsRecentNew(MonitorsRecentNew monitorsRecentNew) {
+        this.monitorsRecentNews.add(monitorsRecentNew);
     }
 
     private Aluno getFormDataAluno() {
@@ -456,6 +465,12 @@ public class MatricularAlunoViewController implements Initializable {
     private void notifyDataChangedListener() {
         for (DataChangedListener listener : dataChangedListeners) {
             listener.onDataChangedListener();
+        }
+    }
+
+    private void notifyMonitorRecentNew(String message) {
+        for (MonitorsRecentNew recents : monitorsRecentNews) {
+            recents.onMonitorsRecentNew(message);
         }
     }
 
