@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.SelecionarAlunoDesmatricularViewController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Selecione o aluno - Desmatrícula">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="15.0" layoutY="59.0" text="Resultado da pesquisa:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="179.0" layoutY="59.0" text="Nome do aluno..." textFill="RED">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableViewAluno" layoutX="15.0" layoutY="122.0" prefHeight="480.0" prefWidth="915.0" stylesheets="@../styles/MainSecretariaView.css">
+         <columns>
+            <TableColumn fx:id="tableColumnId" prefWidth="46.0" text="Cod" />
+            <TableColumn fx:id="tableColumnNome" prefWidth="172.0" text="Nome" />
+            <TableColumn fx:id="tableColumnEmail" prefWidth="180.0" text="E-mail" />
+            <TableColumn fx:id="tableColumnRG" prefWidth="133.0" text="RG" />
+            <TableColumn fx:id="tableColumnSexo" prefWidth="58.0" text="Sexo" />
+            <TableColumn fx:id="tableColumnSerie" prefWidth="63.0" text="Sére" />
+            <TableColumn fx:id="tableColumnTurma" prefWidth="53.0" text="Turma" />
+            <TableColumn fx:id="tableColumnRA" prefWidth="125.0" text="RA" />
+            <TableColumn fx:id="tableColumnDETALHES" prefWidth="100.0" />
+         </columns>
+         <styleClass>
+            <String fx:value="radius" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </TableView>
+      <Label layoutX="15.0" layoutY="87.0" text="Resultado da pesquisa:">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="179.0" layoutY="87.0" text="RA do aluno..." textFill="RED">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

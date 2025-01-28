@@ -20,6 +20,10 @@ public class AlunoService {
         }
     }
 
+    public void deleteById(Integer id) {
+        dao.deleteById(id);
+    }
+
     public List<Aluno> findAll() {
         return dao.findAll();
     }

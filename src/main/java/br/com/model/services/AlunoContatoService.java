@@ -19,6 +19,10 @@ public class AlunoContatoService {
         }
     }
 
+    public void deleteById(Integer id) {
+        dao.deleteById(id);
+    }
+
     public List<AlunoContato> findAll() {
         return dao.findAll();
     }

@@ -111,7 +111,7 @@ public class LoginViewController implements Initializable {
         if (userCorrect == 2) {
             loadViewMain("/br/com/view/MainSecretariaView.fxml", (MainSecretariaViewController controller) -> {
                 controller.setEntityUser(entity);
-                controller.setServices(new AlunoService(), new AlunoContatoService(), new TurmaService());
+                controller.setServices(new AlunoService(), new AlunoContatoService());
 //                controller.updateNumberAlunos();
                 controller.updateDataEntityUser();
                 controller.updateTableView();

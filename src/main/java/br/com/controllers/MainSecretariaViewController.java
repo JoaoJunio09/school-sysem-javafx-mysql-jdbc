@@ -2,6 +2,7 @@ package br.com.controllers;
 
 import br.com.exceptions.DbException;
 import br.com.listeners.DataChangedListener;
+import br.com.listeners.MonitorsRecentNew;
 import br.com.model.dto.AlunoDTO;
 import br.com.model.entities.*;
 import br.com.model.services.*;
@@ -30,15 +31,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
-public class MainSecretariaViewController implements Initializable, DataChangedListener {
+public class MainSecretariaViewController implements Initializable, DataChangedListener, MonitorsRecentNew {
 
     private Usuario entityUser;
 
     private AlunoService alunoService;
 
     private AlunoContatoService alunoContatoService;
-
-    private TurmaService turmaService;
 
     @FXML
     private BorderPane borderPaneInicio;
@@ -107,6 +106,9 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
     private Button btMatricularAluno;
 
     @FXML
+    private Button btDesmatricularAluno;
+
+    @FXML
     private Button btProfessor;
 
     @FXML
@@ -128,7 +130,7 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
     private ScrollPane scrollPaneRecentes;
 
     @FXML
-    private VBox VBoxScrollPaneRecentes;
+    private VBox VBoxRecentes;
 
     @FXML
     private Label labelQuantidadeAlunos;
@@ -140,13 +142,19 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
     }
 
     @FXML
+    public void onBtDesmatricularAlunoAction(ActionEvent event) {
+        Stage parent = Utils.currentStage(event);
+        createFormDesmatricularAluno(new Aluno(), new AlunoContato(), "/br/com/view/DesmatricularAlunoView.fxml", parent);
+    }
+
+    @FXML
     public void onBtBuscarAlunoAction(ActionEvent event) {
         try {
             String query = generateQuerySearch();
             updateTableViewSeach(query);
         }
         catch (DbException e) {
-            Alerts.showAlert("Erro com acessar os dados", null, "Preencha os campos", Alert.AlertType.ERROR);
+            Alerts.showAlert("Erro ao acessar os dados", null, "Preencha os campos", Alert.AlertType.ERROR);
         }
     }
 
@@ -212,10 +220,9 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
         this.entityUser = entityUser;
     }
 
-    public void setServices(AlunoService alunoService, AlunoContatoService alunoContatoService, TurmaService turmaService) {
+    public void setServices(AlunoService alunoService, AlunoContatoService alunoContatoService) {
         this.alunoService = alunoService;
         this.alunoContatoService = alunoContatoService;
-        this.turmaService = turmaService;
     }
 
     public void updateDataEntityUser() {
@@ -259,8 +266,31 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
             controller.setEntities(objAluno, objPessoa, objAlunoMatricula, objAlunoContato);
             controller.setServices(new AlunoService(), new PessoaService(), new AlunoMatriculaService(), new AlunoContatoService(), new TurmaService());
             controller.setDataChangedListener(this);
+            controller.setMonitorsRecentNew(this);
             controller.loadAssociatedAllComboBox();
             controller.updateFormData();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(pane));
+            stage.setResizable(false);
+            stage.initOwner(parent);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            Alerts.showAlert("IO Exception" , "Erro ao carregar", e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    private void createFormDesmatricularAluno(Aluno objAluno, AlunoContato objAlunoContato, String absoluteName, Stage parent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+            Pane pane = loader.load();
+
+            DesmatricularAlunoViewController controller = loader.getController();
+            controller.setServices(new AlunoService(), new PessoaService(), new AlunoMatriculaService(), new AlunoContatoService());
+            controller.subscribeDataChangedListener(this);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(pane));
@@ -300,7 +330,7 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
         borderPaneInicio.setVisible(true);
         borderPaneAluno.setVisible(false);
 
-        VBoxScrollPaneRecentes.prefWidthProperty().bind(scrollPaneRecentes.widthProperty());
+        VBoxRecentes.prefWidthProperty().bind(scrollPaneRecentes.widthProperty());
 
         tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -348,5 +378,13 @@ public class MainSecretariaViewController implements Initializable, DataChangedL
     @Override
     public void onDataChangedListener() {
         updateTableView();
+    }
+
+    @Override
+    public void onMonitorsRecentNew(String message) {
+        Label label = new Label(message);
+        VBoxRecentes.getChildren().add(label);
+        label.setLayoutX(20);
+        label.setLayoutY(20);
     }
 }
