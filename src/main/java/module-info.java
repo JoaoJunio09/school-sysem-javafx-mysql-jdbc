@@ -8,4 +8,6 @@ module br.com.schoolsystem {
     exports br.com.schoolsystem;
     exports br.com.controllers;
     exports br.com.model.dto;
+    exports br.com.controllers.secretaria;
+    opens br.com.controllers.secretaria to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package br.com.controllers;
+package br.com.controllers.secretaria;
 
 import br.com.exceptions.DbException;
 import br.com.exceptions.ValidationException;
@@ -6,15 +6,12 @@ import br.com.listeners.DataChangedListener;
 import br.com.listeners.DataChangedListenerAlunoDTO;
 import br.com.model.dto.AlunoDTO;
 import br.com.model.entities.Aluno;
-import br.com.model.entities.AlunoContato;
-import br.com.model.entities.Turma;
 import br.com.model.services.AlunoContatoService;
 import br.com.model.services.AlunoMatriculaService;
 import br.com.model.services.AlunoService;
 import br.com.model.services.PessoaService;
 import br.com.util.Alerts;
 import br.com.util.Utils;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +21,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -99,7 +95,7 @@ public class DesmatricularAlunoViewController implements Initializable, DataChan
             List<Aluno> list = alunoService.search(query);
 
             Stage parent = Utils.currentStage(event);
-            loadViewSelectStudent("/br/com/view/SelecionarAlunoDesmatricularView.fxml", parent, list);
+            loadViewSelectStudent("/br/com/view/secretaria/SelecionarAlunoDesmatricularView.fxml", parent, list);
         }
         catch (ValidationException e) {
             Alerts.showAlert("Erro ao buscar aluno", null, e.getErrors().get("ra"), Alert.AlertType.ERROR);
@@ -113,6 +109,9 @@ public class DesmatricularAlunoViewController implements Initializable, DataChan
     public void onBtConfirmarAction(ActionEvent event) {
         if (alunoService == null || pessoaService == null || alunoMatriculaService == null) {
             throw new IllegalStateException("Services was null");
+        }
+        if (txtNome.getText() == null || txtNome.getText().trim().equals("")) {
+            Alerts.showAlert("Erro ao confimar", null, "Busque um aluno para ser desmatrículado", Alert.AlertType.ERROR);
         }
         try {
             for (Aluno aluno : alunoService.findAll()) {
@@ -133,6 +132,9 @@ public class DesmatricularAlunoViewController implements Initializable, DataChan
                     Utils.currentStage(event).close();
                 }
             }
+        }
+        catch (ValidationException e) {
+            Alerts.showAlert("Erro ao cofirmar", null, e.getErrors().get("txts"), Alert.AlertType.ERROR);
         }
         catch (DbException e) {
             e.printStackTrace();
@@ -191,7 +193,7 @@ public class DesmatricularAlunoViewController implements Initializable, DataChan
         return query;
     }
 
-    private void updateDataAluno(AlunoDTO objDto) {
+    public void updateDataAluno(AlunoDTO objDto) {
         if (objDto == null) {
             throw new IllegalStateException("Aluno was null");
         }

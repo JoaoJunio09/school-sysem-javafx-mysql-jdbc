@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.DesmatricularAlunoViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.secretaria.DesmatricularAlunoViewController">
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="950.0" style="-fx-background-color: black;">
          <children>
@@ -25,7 +25,7 @@
       </AnchorPane>
       <AnchorPane layoutY="50.0" prefHeight="583.0" prefWidth="950.0">
          <children>
-            <AnchorPane prefHeight="314.0" prefWidth="286.0" style="-fx-background-color: #fff;" stylesheets="@../styles/MainSecretariaView.css" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <AnchorPane prefHeight="314.0" prefWidth="286.0" style="-fx-background-color: #fff;" stylesheets="@../../styles/MainSecretariaView.css" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                <styleClass>
                   <String fx:value="shadow" />
                   <String fx:value="radius" />
@@ -33,12 +33,12 @@
                <children>
                   <ImageView fitHeight="281.0" fitWidth="200.0" layoutX="42.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="65.0" AnchorPane.topAnchor="49.0">
                      <image>
-                        <Image url="@../images/profile.png" />
+                        <Image url="@../../images/profile.png" />
                      </image>
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="334.0" layoutY="26.0" prefHeight="538.0" prefWidth="601.0" style="-fx-background-color: #fff;" stylesheets="@../styles/MainSecretariaView.css" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.399999999999977" AnchorPane.topAnchor="26.0">
+            <AnchorPane layoutX="334.0" layoutY="26.0" prefHeight="538.0" prefWidth="601.0" style="-fx-background-color: #fff;" stylesheets="@../../styles/MainSecretariaView.css" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.399999999999977" AnchorPane.topAnchor="26.0">
                <styleClass>
                   <String fx:value="shadow" />
                   <String fx:value="radius" />

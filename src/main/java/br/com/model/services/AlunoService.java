@@ -21,6 +21,9 @@ public class AlunoService {
     }
 
     public void deleteById(Integer id) {
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null");
+        }
         dao.deleteById(id);
     }
 
