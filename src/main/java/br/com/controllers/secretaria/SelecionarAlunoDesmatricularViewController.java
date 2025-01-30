@@ -1,10 +1,8 @@
-package br.com.controllers;
+package br.com.controllers.secretaria;
 
-import br.com.listeners.DataChangedListener;
 import br.com.listeners.DataChangedListenerAlunoDTO;
 import br.com.model.dto.AlunoDTO;
 import br.com.model.entities.Aluno;
-import br.com.model.services.AlunoService;
 import br.com.util.Alerts;
 import br.com.util.Utils;
 import javafx.beans.property.ReadOnlyObjectWrapper;

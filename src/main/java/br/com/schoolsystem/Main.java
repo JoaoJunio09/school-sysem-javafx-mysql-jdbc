@@ -6,12 +6,10 @@ import br.com.model.dao.DaoFactory;
 import br.com.model.entities.*;
 import br.com.model.services.LoginService;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
-import java.util.List;
 
 public class Main extends javafx.application.Application {
 
@@ -19,7 +17,7 @@ public class Main extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/br/com/view/LoginView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/br/com/view/secretaria/LoginView.fxml"));
         Pane paneLogin = fxmlLoader.load();
 
         LoginViewController controller = fxmlLoader.getController();

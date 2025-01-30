@@ -14,13 +14,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="400.0" styleClass="pane-background" stylesheets="@../styles/LoginView.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.LoginViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="400.0" styleClass="pane-background" stylesheets="@../../styles/LoginView.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.LoginViewController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="400.0">
          <children>
             <ImageView fitHeight="139.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="28.0">
                <image>
-                  <Image url="@../images/botao-de-login-do-usuario.png" />
+                  <Image url="@../../images/botao-de-login-do-usuario.png" />
                </image>
             </ImageView>
             <Label styleClass="title-login" text="Fazer login" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="88.0">

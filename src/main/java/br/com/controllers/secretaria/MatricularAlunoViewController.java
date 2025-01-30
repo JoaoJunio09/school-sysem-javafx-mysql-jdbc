@@ -1,4 +1,4 @@
-package br.com.controllers;
+package br.com.controllers.secretaria;
 
 import br.com.exceptions.DbException;
 import br.com.exceptions.UserAlreadyExists;

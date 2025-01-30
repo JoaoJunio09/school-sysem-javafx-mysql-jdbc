@@ -1,12 +1,12 @@
 package br.com.controllers;
 
+import br.com.controllers.secretaria.MainSecretariaViewController;
 import br.com.exceptions.DbException;
 import br.com.exceptions.ValidationException;
 import br.com.model.entities.Usuario;
 import br.com.model.services.AlunoContatoService;
 import br.com.model.services.AlunoService;
 import br.com.model.services.LoginService;
-import br.com.model.services.TurmaService;
 import br.com.schoolsystem.Main;
 import br.com.util.Alerts;
 import br.com.util.Constraints;
@@ -109,12 +109,10 @@ public class LoginViewController implements Initializable {
             Alerts.showAlert("Erro ao fazer login", null, "Tipo de usuário incorreto", Alert.AlertType.ERROR);
         }
         if (userCorrect == 2) {
-            loadViewMain("/br/com/view/MainSecretariaView.fxml", (MainSecretariaViewController controller) -> {
+            loadViewMain("/br/com/view/secretaria/MainSecretariaView.fxml", (MainSecretariaViewController controller) -> {
                 controller.setEntityUser(entity);
-                controller.setServices(new AlunoService(), new AlunoContatoService());
 //                controller.updateNumberAlunos();
                 controller.updateDataEntityUser();
-                controller.updateTableView();
             }, event);
         }
     }
