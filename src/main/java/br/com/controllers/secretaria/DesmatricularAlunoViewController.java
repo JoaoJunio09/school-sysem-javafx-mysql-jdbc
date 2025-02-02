@@ -115,7 +115,6 @@ public class DesmatricularAlunoViewController implements Initializable, DataChan
         }
         try {
             for (Aluno aluno : alunoService.findAll()) {
-                System.out.println(entityDto);
                 if (aluno.getId().equals(entityDto.getId())) {
                     int ID_PESSOA = aluno.getPessoa().getId();
                     int ID_ALUNO = aluno.getId();

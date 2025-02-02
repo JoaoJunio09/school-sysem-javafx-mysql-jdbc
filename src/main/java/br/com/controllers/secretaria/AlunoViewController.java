@@ -1,6 +1,7 @@
 package br.com.controllers.secretaria;
 
 import br.com.exceptions.DbException;
+import br.com.listeners.DataChangedListener;
 import br.com.model.dto.AlunoDTO;
 import br.com.model.entities.*;
 import br.com.model.services.*;
@@ -27,19 +28,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AlunoViewController implements Initializable {
-
-    private Usuario entityUser;
+public class AlunoViewController implements Initializable, DataChangedListener {
 
     private AlunoService alunoService;
 
     private AlunoContatoService alunoContatoService;
-
-    @FXML
-    private AnchorPane anchorPaneMain;
-
-    @FXML
-    private AnchorPane anchorPaneParent;
 
     @FXML
     private TextField txtBuscaPorNome;
@@ -165,7 +158,7 @@ public class AlunoViewController implements Initializable {
             MatricularAlunoViewController controller = loader.getController();
             controller.setEntities(objAluno, objPessoa, objAlunoMatricula, objAlunoContato);
             controller.setServices(new AlunoService(), new PessoaService(), new AlunoMatriculaService(), new AlunoContatoService(), new TurmaService());
-//            controller.setDataChangedListener(this);
+            controller.setDataChangedListener(this);
 //            controller.setMonitorsRecentNew(this);
             controller.loadAssociatedAllComboBox();
             controller.updateFormData();
@@ -190,7 +183,7 @@ public class AlunoViewController implements Initializable {
 
             DesmatricularAlunoViewController controller = loader.getController();
             controller.setServices(new AlunoService(), new PessoaService(), new AlunoMatriculaService(), new AlunoContatoService());
-//            controller.subscribeDataChangedListener(this);
+            controller.subscribeDataChangedListener(this);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(pane));
@@ -226,8 +219,7 @@ public class AlunoViewController implements Initializable {
 
         AlunoContato contato = null;
 
-        List<AlunoContato> list = alunoContatoService.findAll();
-        for (AlunoContato alunoContato : list) {
+        for (AlunoContato alunoContato : alunoContatoService.findAll()) {
             if (alunoContato.getAluno().getId().equals(obj.getId())) {
                 contato = alunoContato;
             }
@@ -268,5 +260,10 @@ public class AlunoViewController implements Initializable {
                 button.setOnAction(event -> exibirDetalhesAluno(obj, event));
             }
         });
+    }
+
+    @Override
+    public void onDataChangedListener() {
+        updateTableView();
     }
 }

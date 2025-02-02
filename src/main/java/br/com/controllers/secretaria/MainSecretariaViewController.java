@@ -38,6 +38,9 @@ public class MainSecretariaViewController implements Initializable, MonitorsRece
     private AnchorPane anchorPaneContent;
 
     @FXML
+    private BorderPane borderPaneActual;
+
+    @FXML
     private Label labelUsuario;
 
     @FXML
@@ -71,16 +74,19 @@ public class MainSecretariaViewController implements Initializable, MonitorsRece
     private Button btSair;
 
     @FXML
-    public void onBtInicioAction() {
+    public void onBtInicioAction(ActionEvent event) {
+        borderPaneActual.setVisible(false);
         loadView("/br/com/view/secretaria/InicioView.fxml", (InicioViewController controller) -> {
             //
         });
     }
 
     @FXML
-    public void onBtAlunoAction() {
+    public void onBtAlunoAction(ActionEvent event) {
+        borderPaneActual.setVisible(false);
         loadView("/br/com/view/secretaria/AlunoView.fxml", (AlunoViewController controller) -> {
-            //
+            controller.setServices(new AlunoService(), new AlunoContatoService());
+            controller.updateTableView();
         });
     }
 
@@ -93,10 +99,6 @@ public class MainSecretariaViewController implements Initializable, MonitorsRece
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             BorderPane borderPane = loader.load();
 
-            Node anchorPaneHeader = anchorPaneContent.getChildren().get(0);
-
-            anchorPaneContent.getChildren().clear();
-            anchorPaneContent.getChildren().add(anchorPaneHeader);
             anchorPaneContent.getChildren().add(borderPane);
 
             borderPane.setLayoutY(50);
@@ -105,6 +107,8 @@ public class MainSecretariaViewController implements Initializable, MonitorsRece
             AnchorPane.setLeftAnchor(borderPane, 0.0);
             AnchorPane.setRightAnchor(borderPane, 0.0);
             AnchorPane.setBottomAnchor(borderPane,0.0);
+
+            borderPaneActual = borderPane;
 
             T controller = loader.getController();
             initializing.accept(controller);
