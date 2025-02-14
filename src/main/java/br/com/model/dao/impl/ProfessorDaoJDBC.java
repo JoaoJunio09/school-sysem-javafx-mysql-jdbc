@@ -25,9 +25,10 @@ public class ProfessorDaoJDBC implements CRUD<Professor> {
     @Override
     public void insert(Professor obj) {
         PreparedStatement stmt = null;
-        String sql = "INSERT INTO tb_professor (Id_pessoa, Id_professor_matricula) VALUES (?, ?)";
+        PreparedStatement stmtDisc = null;
+        String sqlProfessor = "INSERT INTO tb_professor (Id_pessoa, Id_professor_matricula) VALUES (?, ?)";
         try {
-            stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt = conn.prepareStatement(sqlProfessor, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, obj.getPessoa().getId());
             stmt.setInt(2, obj.getProfessor_matricula().getId());
             int rowsAffected = stmt.executeUpdate();

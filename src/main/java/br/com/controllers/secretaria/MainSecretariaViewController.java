@@ -38,7 +38,7 @@ public class MainSecretariaViewController implements Initializable, MonitorsRece
     private AnchorPane anchorPaneContent;
 
     @FXML
-    private BorderPane borderPaneActual;
+    private AnchorPane anchorPaneActual;
 
     @FXML
     private Label labelUsuario;
@@ -74,19 +74,27 @@ public class MainSecretariaViewController implements Initializable, MonitorsRece
     private Button btSair;
 
     @FXML
-    public void onBtInicioAction(ActionEvent event) {
-        borderPaneActual.setVisible(false);
+    public void onBtInicioAction() {
+        anchorPaneActual.setVisible(false);
         loadView("/br/com/view/secretaria/InicioView.fxml", (InicioViewController controller) -> {
             //
         });
     }
 
     @FXML
-    public void onBtAlunoAction(ActionEvent event) {
-        borderPaneActual.setVisible(false);
+    public void onBtAlunoAction() {
+        anchorPaneActual.setVisible(false);
         loadView("/br/com/view/secretaria/AlunoView.fxml", (AlunoViewController controller) -> {
-            controller.setServices(new AlunoService(), new AlunoContatoService());
-            controller.updateTableView();
+//            controller.setServices(new AlunoService(), new AlunoContatoService());
+//            controller.updateTableViewAluno();
+        });
+    }
+
+    @FXML
+    public void onBtProfessorAction() {
+        anchorPaneActual.setVisible(false);
+        loadView("/br/com/view/secretaria/ProfessorView.fxml", (ProfessorViewController controller) -> {
+            //
         });
     }
 
@@ -97,18 +105,18 @@ public class MainSecretariaViewController implements Initializable, MonitorsRece
     private synchronized <T> void loadView(String absoluteName, Consumer<T> initializing) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-            BorderPane borderPane = loader.load();
+            AnchorPane anchorPane = loader.load();
 
-            anchorPaneContent.getChildren().add(borderPane);
+            anchorPaneContent.getChildren().add(anchorPane);
 
-            borderPane.setLayoutY(50);
+            anchorPane.setLayoutY(50);
 
-            AnchorPane.setTopAnchor(borderPane, 50.0);
-            AnchorPane.setLeftAnchor(borderPane, 0.0);
-            AnchorPane.setRightAnchor(borderPane, 0.0);
-            AnchorPane.setBottomAnchor(borderPane,0.0);
+            AnchorPane.setTopAnchor(anchorPane, 50.0);
+            AnchorPane.setLeftAnchor(anchorPane, 0.0);
+            AnchorPane.setRightAnchor(anchorPane, 0.0);
+            AnchorPane.setBottomAnchor(anchorPane,0.0);
 
-            borderPaneActual = borderPane;
+            anchorPaneActual = anchorPane;
 
             T controller = loader.getController();
             initializing.accept(controller);

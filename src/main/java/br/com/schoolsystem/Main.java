@@ -17,7 +17,7 @@ public class Main extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/br/com/view/secretaria/LoginView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/br/com/view/LoginView.fxml"));
         Pane paneLogin = fxmlLoader.load();
 
         LoginViewController controller = fxmlLoader.getController();
