@@ -1,134 +1,224 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="990.0" stylesheets="@../../styles/MainSecretariaView.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.secretaria.AlunoViewController">
-   <top>
-      <AnchorPane prefHeight="70.0" prefWidth="1008.0" styleClass="header-inicio" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER_RIGHT" layoutX="173.0" layoutY="5.0" prefHeight="61.0" prefWidth="806.0" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+<AnchorPane fx:id="anchorPaneContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.secretaria.AlunoViewController">
+   <children>
+      <BorderPane fx:id="borderPaneActual" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="990.0" stylesheets="@../../styles/MainSecretariaView.css" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="70.0" prefWidth="1008.0" styleClass="header-inicio" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="onBtMatricularAlunoAction" mnemonicParsing="false" onAction="#onBtMatricularAlunoAction" prefHeight="45.0" prefWidth="124.0" styleClass="bt-options-aluno-2" text="Matricular">
+                  <HBox alignment="CENTER_RIGHT" layoutX="173.0" layoutY="5.0" prefHeight="61.0" prefWidth="806.0" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                  <Label layoutX="14.0" layoutY="16.0" text="Aluno - Painel" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0">
                      <font>
-                        <Font name="Arial" size="15.0" />
+                        <Font name="BebasNeue" size="30.0" />
                      </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="onBtDesmatricularAlunoAction" mnemonicParsing="false" onAction="#onBtDesmatricularAlunoAction" prefHeight="45.0" prefWidth="124.0" styleClass="bt-options-aluno-2" text="Desmatricular">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="124.0" styleClass="bt-options-aluno-2" text="Boletim">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="124.0" styleClass="bt-options-aluno-2" text="Aulas">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="124.0" styleClass="bt-options-aluno-2" text="Notas">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="124.0" styleClass="bt-options-aluno-2" text="Ocorrencias">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </HBox>
-            <Label layoutX="14.0" layoutY="16.0" text="Aluno - Painel" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0">
-               <font>
-                  <Font name="BebasNeue" size="30.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </top>
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <AnchorPane layoutX="14.0" layoutY="17.0" prefHeight="63.0" prefWidth="950.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-               <styleClass>
-                  <String fx:value="radius" />
-                  <String fx:value="shadow" />
-                  <String fx:value="background" />
-               </styleClass>
-               <children>
-                  <TextField fx:id="txtBuscaPorNome" layoutX="14.0" layoutY="9.0" prefHeight="45.0" prefWidth="406.0" promptText="digite o nome do aluno">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                  </TextField>
-                  <Button fx:id="btBuscarAluno" layoutX="427.0" layoutY="9.0" mnemonicParsing="false" onAction="#onBtBuscarAlunoAction" prefHeight="45.0" prefWidth="124.0" styleClass="bt-pesquisar-inicio" text="Pesquisar">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="btListarTodosAlunos" layoutX="557.0" layoutY="9.0" mnemonicParsing="false" onAction="#onBtListarTodosAlunosAction" prefHeight="45.0" prefWidth="124.0" style="-fx-background-color: green;" text="Listar Todos" textFill="WHITE">
-                     <font>
-                        <Font name="Arial" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
+                  </Label>
                </children>
             </AnchorPane>
-            <TableView fx:id="tableViewAluno" layoutX="36.0" layoutY="84.0" prefHeight="506.0" prefWidth="970.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="84.0">
-              <columns>
-                <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="Cod." />
-                  <TableColumn fx:id="tableColumnNome" prefWidth="75.0" text="Nome" />
-                  <TableColumn fx:id="tableColumnEmail" prefWidth="75.0" text="E-mail" />
-                  <TableColumn fx:id="tableColumnRG" prefWidth="75.0" text="Rg" />
-                  <TableColumn fx:id="tableColumnSexo" prefWidth="75.0" text="Sexo" />
-                  <TableColumn fx:id="tableColumnSerie" prefWidth="75.0" text="Serie" />
-                  <TableColumn fx:id="tableColumnTurma" prefWidth="75.0" text="Turma" />
-                  <TableColumn fx:id="tableColumnRA" prefWidth="75.0" text="RA" />
-                  <TableColumn fx:id="tableColumnDETALHES" prefWidth="75.0" />
-              </columns>
-               <styleClass>
-                  <String fx:value="radius" />
-                  <String fx:value="shadow" />
-                  <String fx:value="table-view" />
-                  <String fx:value="border-left" />
-               </styleClass>
-            </TableView>
-         </children>
-      </AnchorPane>
-   </center>
-</BorderPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="610.0" prefWidth="995.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" layoutX="32.0" layoutY="39.0" prefHeight="530.0" prefWidth="926.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="32.799999999999955" AnchorPane.topAnchor="39.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="234.0" prefWidth="926.0" spacing="50.0">
+                           <children>
+                              <Button fx:id="btMatricula" mnemonicParsing="false" onAction="#onBtMatriculaAction" prefHeight="210.0" prefWidth="270.0">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <VBox alignment="CENTER" prefHeight="146.0" prefWidth="221.0" spacing="20.0">
+                                       <children>
+                                          <ImageView fitHeight="66.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/file-signature.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="1.0" />
+                                             </effect>
+                                          </ImageView>
+                                          <Label text="MatrÍcula" textFill="WHITE">
+                                             <font>
+                                                <Font name="BebasNeue" size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="total-alunos" />
+                                    <String fx:value="radius-20px" />
+                                    <String fx:value="shadow-aluno" />
+                                 </styleClass>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="270.0">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <VBox alignment="CENTER" prefHeight="146.0" prefWidth="221.0" spacing="20.0">
+                                       <children>
+                                          <ImageView fitHeight="66.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/chat-arrow-grow.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="1.0" />
+                                             </effect>
+                                          </ImageView>
+                                          <Label text="Presença" textFill="WHITE">
+                                             <font>
+                                                <Font name="BebasNeue" size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="total-alunos" />
+                                    <String fx:value="radius-20px" />
+                                    <String fx:value="shadow-aluno" />
+                                 </styleClass>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="270.0">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <VBox alignment="CENTER" prefHeight="146.0" prefWidth="221.0" spacing="20.0">
+                                       <children>
+                                          <ImageView fitHeight="66.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/rectangle-list.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="1.0" />
+                                             </effect>
+                                          </ImageView>
+                                          <Label text="Listar" textFill="WHITE">
+                                             <font>
+                                                <Font name="BebasNeue" size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="total-alunos" />
+                                    <String fx:value="radius-20px" />
+                                    <String fx:value="shadow-aluno" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="222.0" prefWidth="926.0" spacing="50.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="270.0">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <VBox alignment="CENTER" prefHeight="146.0" prefWidth="221.0" spacing="20.0">
+                                       <children>
+                                          <ImageView fitHeight="66.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/phone-plus.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="1.0" />
+                                             </effect>
+                                          </ImageView>
+                                          <Label text="Contato" textFill="WHITE">
+                                             <font>
+                                                <Font name="BebasNeue" size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="total-alunos" />
+                                    <String fx:value="radius-20px" />
+                                    <String fx:value="shadow-aluno" />
+                                 </styleClass>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="270.0">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <VBox alignment="CENTER" prefHeight="146.0" prefWidth="221.0" spacing="20.0">
+                                       <children>
+                                          <ImageView fitHeight="66.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/calendar-clock.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="1.0" />
+                                             </effect>
+                                          </ImageView>
+                                          <Label text="Horários" textFill="WHITE">
+                                             <font>
+                                                <Font name="BebasNeue" size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="total-alunos" />
+                                    <String fx:value="radius-20px" />
+                                    <String fx:value="shadow-aluno" />
+                                 </styleClass>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="210.0" prefWidth="270.0">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <VBox alignment="CENTER" prefHeight="146.0" prefWidth="221.0" spacing="20.0">
+                                       <children>
+                                          <ImageView fitHeight="66.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/memo.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="1.0" />
+                                             </effect>
+                                          </ImageView>
+                                          <Label text="Boletim" textFill="WHITE">
+                                             <font>
+                                                <Font name="BebasNeue" size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="total-alunos" />
+                                    <String fx:value="radius-20px" />
+                                    <String fx:value="shadow-aluno" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

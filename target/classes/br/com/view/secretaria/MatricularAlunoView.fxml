@@ -259,7 +259,7 @@
                   <Font name="Arial" size="13.0" />
                </font>
             </TextArea>
-            <Button fx:id="btLimparCampos" layoutX="576.0" layoutY="440.0" mnemonicParsing="false" onAction="#onBtLimparCamposAction" prefHeight="50.0" prefWidth="299.0" text="Limpar campos" AnchorPane.rightAnchor="13.0">
+            <Button fx:id="btLimparCampos" layoutX="576.0" layoutY="440.0" mnemonicParsing="false" onAction="#onBtLimparCamposAction" prefHeight="50.0" prefWidth="299.0" text="Adicionar foto" AnchorPane.rightAnchor="13.0">
                <font>
                   <Font name="BebasNeue" size="20.0" />
                </font>

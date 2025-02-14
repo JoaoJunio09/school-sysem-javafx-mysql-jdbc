@@ -229,7 +229,7 @@ public class MatricularAlunoViewController implements Initializable {
         this.turmaService = turmaService;
     }
 
-    public void setDataChangedListener(DataChangedListener dataChangedListener) {
+    public void subscribeDataChangeListener(DataChangedListener dataChangedListener) {
         this.dataChangedListeners.add(dataChangedListener);
     }
 
@@ -347,8 +347,8 @@ public class MatricularAlunoViewController implements Initializable {
         obj.setId(Utils.tryParseToInt(txtIdContato.getText()));
 
         if (
-                txtAreaDescricao.getText() == null || txtAreaDescricao.getText().trim().equals("") ||
-                txtAreaContato.getText() == null || txtAreaContato.getText().trim().equals("")
+            txtAreaDescricao.getText() == null || txtAreaDescricao.getText().trim().equals("") ||
+            txtAreaContato.getText() == null || txtAreaContato.getText().trim().equals("")
         ) {
             exception.setErrors("errors", "Preencha todos os campos");
         }
@@ -474,25 +474,6 @@ public class MatricularAlunoViewController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeNodes();
-    }
-
-    private void initializeNodes() {
-        Constraints.setTextFieldInteger(txtIdPessoa);
-        Constraints.setTextFieldInteger(txtIdMatricula);
-        Constraints.setTextFieldInteger(txtIdContato);
-
-        Utils.formatDatePicker(dpDataNascimentoPessoa, "dd/MM/yyyy");
-        Utils.formatDatePicker(dpDataMatricula, "dd/MM/yyyy");
-
-        initializeComboBoxCorRaca();
-        initializeComboBoxDeficiencia();
-        initializeComboBoxTipoSanguineo();
-        initializeComboBoxTurma();
-    }
-
     public void loadAssociatedAllComboBox() {
         loadAssociatedCorRaca();
         loadAssociatedDeficiencia();
@@ -574,5 +555,21 @@ public class MatricularAlunoViewController implements Initializable {
         };
         comboBoxTipoSanguineo.setCellFactory(factory);
         comboBoxTipoSanguineo.setButtonCell(factory.call(null));
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeNodes();
+    }
+
+    private void initializeNodes() {
+        Constraints.setTextFieldInteger(txtIdPessoa);
+        Constraints.setTextFieldInteger(txtIdMatricula);
+        Constraints.setTextFieldInteger(txtIdContato);
+
+        initializeComboBoxCorRaca();
+        initializeComboBoxDeficiencia();
+        initializeComboBoxTipoSanguineo();
+        initializeComboBoxTurma();
     }
 }

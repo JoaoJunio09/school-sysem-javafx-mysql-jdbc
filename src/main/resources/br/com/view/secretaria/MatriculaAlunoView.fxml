@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="990.0" stylesheets="@../../styles/MainSecretariaView.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controllers.secretaria.MatriculaAlunoViewController">
+   <top>
+       <AnchorPane prefHeight="70.0" prefWidth="1008.0" styleClass="header-inicio" BorderPane.alignment="CENTER">
+           <children>
+               <HBox alignment="CENTER_RIGHT" layoutX="173.0" layoutY="5.0" prefHeight="61.0" prefWidth="806.0" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+               <Label layoutX="14.0" layoutY="16.0" text="Aluno - Matrícula" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0">
+                   <font>
+                       <Font name="BebasNeue" size="30.0" />
+                   </font>
+               </Label>
+           </children>
+       </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="547.0" prefWidth="990.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="anchorPaneTableView" layoutY="114.0" prefHeight="496.0" prefWidth="990.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="596.0" spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <children>
+                        <Button fx:id="btMatricular" mnemonicParsing="false" onAction="#onBtMatricularAction" prefHeight="105.0" prefWidth="140.0">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <graphic>
+                              <VBox alignment="CENTER" prefHeight="107.0" prefWidth="119.0" spacing="12.0">
+                                 <children>
+                                    <ImageView fitHeight="47.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/user-add.png" />
+                                       </image>
+                                       <effect>
+                                          <ColorAdjust brightness="1.0" />
+                                       </effect>
+                                    </ImageView>
+                                    <Label text="Matricular" textFill="WHITE">
+                                       <font>
+                                          <Font name="Lato Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="radius" />
+                              <String fx:value="backgorund-button-aluno-matricular" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btDesmatricular" mnemonicParsing="false" onAction="#onBtDesmatricularAction" prefHeight="105.0" prefWidth="140.0">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <graphic>
+                              <VBox alignment="CENTER" prefHeight="107.0" prefWidth="119.0" spacing="12.0">
+                                 <children>
+                                    <ImageView fitHeight="47.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/delete-user.png" />
+                                       </image>
+                                       <effect>
+                                          <ColorAdjust brightness="1.0" />
+                                       </effect>
+                                    </ImageView>
+                                    <Label text="Desmatricular" textFill="WHITE">
+                                       <font>
+                                          <Font name="Lato Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="radius" />
+                              <String fx:value="backgorund-button-aluno-desmatricular" />
+                           </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onBtsLoadViewAluno" prefHeight="105.0" prefWidth="140.0">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <graphic>
+                              <VBox alignment="CENTER" prefHeight="107.0" prefWidth="119.0" spacing="12.0">
+                                 <children>
+                                    <ImageView fitHeight="47.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/refresh.png" />
+                                       </image>
+                                       <effect>
+                                          <ColorAdjust brightness="1.0" />
+                                       </effect>
+                                    </ImageView>
+                                    <Label text="Alterar" textFill="WHITE">
+                                       <font>
+                                          <Font name="Lato Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="radius" />
+                              <String fx:value="backgorund-button-aluno" />
+                           </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onBtsLoadViewAluno" prefHeight="105.0" prefWidth="140.0">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <graphic>
+                              <VBox alignment="CENTER" prefHeight="107.0" prefWidth="119.0" spacing="12.0">
+                                 <children>
+                                    <ImageView fitHeight="47.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/tempo-passado.png" />
+                                       </image>
+                                       <effect>
+                                          <ColorAdjust brightness="1.0" />
+                                       </effect>
+                                    </ImageView>
+                                    <Label text="Histórico" textFill="WHITE">
+                                       <font>
+                                          <Font name="Lato Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="radius" />
+                              <String fx:value="backgorund-button-aluno" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <AnchorPane fx:id="anchorPaneTableViewAluno" prefHeight="404.0" prefWidth="879.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="120.0">
+                     <children>
+                        <ScrollPane fx:id="scrollPaneAluno" layoutY="-13.0" prefHeight="475.0" prefWidth="675.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <TableView fx:id="tableViewAluno" prefHeight="473.0" prefWidth="692.0">
+                                <columns>
+                                  <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="Cód." />
+                                  <TableColumn fx:id="tableColumnNome" prefWidth="75.0" text="Nome" />
+                                    <TableColumn fx:id="tableColumnEmail" prefWidth="75.0" text="E-mail" />
+                                    <TableColumn fx:id="tableColumnRg" prefWidth="75.0" text="Rg" />
+                                    <TableColumn fx:id="tableColumnSexo" prefWidth="75.0" text="Sexo" />
+                                    <TableColumn fx:id="tableColumnSerie" prefWidth="75.0" text="Série" />
+                                    <TableColumn fx:id="tableColumnTurma" prefWidth="109.0" text="Turma" />
+                                    <TableColumn fx:id="tableColumnRa" prefWidth="84.0" text="RA" />
+                                    <TableColumn fx:id="tableColumnEDIT" prefWidth="84.0" />
+                                    <TableColumn fx:id="tableColumnRa11" prefWidth="84.0" />
+                                </columns>
+                                 <styleClass>
+                                    <String fx:value="shadow" />
+                                    <String fx:value="radius" />
+                                    <String fx:value="border-left" />
+                                    <String fx:value="table-view" />
+                                 </styleClass>
+                              </TableView>
+                           </content>
+                           <styleClass>
+                              <String fx:value="radius" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                  <Pane layoutX="664.0" layoutY="120.0" prefHeight="166.0" prefWidth="272.0" AnchorPane.rightAnchor="54.0">
+                     <styleClass>
+                        <String fx:value="pane-numero-alunos" />
+                        <String fx:value="shadow" />
+                        <String fx:value="radius" />
+                     </styleClass>
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Nº de Alunos" textFill="WHITE">
+                           <font>
+                              <Font name="BebasNeue" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelNumeroAlunos" layoutX="208.0" layoutY="58.0" text="0" textFill="WHITE">
+                           <font>
+                              <Font name="BebasNeue" size="55.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="89.0" fitWidth="86.0" layoutX="7.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/aluna.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <LineChart layoutX="654.0" layoutY="305.0" prefHeight="295.0" prefWidth="292.0" title="Matrículas por mês" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="44.0" AnchorPane.topAnchor="305.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="anchorPaneMatricular" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+                     <children>
+                        <Label text="Informe os dados">
+                           <font>
+                              <Font name="BebasNeue" size="25.0" />
+                           </font>
+                        </Label>
+                        <VBox prefHeight="539.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <children>
+                              <Label text="Pessoa">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="960.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Cod">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="46.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="Nome">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="250.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="Endereço">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="250.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="Complemento">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="116.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="960.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Número">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="67.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="Bairro">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="203.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="Cep">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="145.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="E-mail">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="308.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="960.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Data de nascimento">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker prefHeight="30.0" prefWidth="163.0" />
+                                    <Label text="Sexo">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="86.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="CPF">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="180.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="RG">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="171.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="960.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Naturalidade">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="210.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="Nacionalidade">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="210.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <Label text="Dados Matrícula">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="960.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Cod">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="46.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="Cor/raça">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox prefHeight="30.0" prefWidth="203.0" />
+                                    <Label text="Deficiência">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox prefHeight="30.0" prefWidth="180.0" />
+                                    <Label text="Tipo sanguíneo">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox prefHeight="30.0" prefWidth="195.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="125.0" prefWidth="960.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Necessidados especiais">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextArea prefHeight="85.0" prefWidth="425.0" />
+                                    <VBox prefHeight="121.0" prefWidth="347.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="121.0" prefWidth="343.0" spacing="70.0">
+                                             <children>
+                                                <Label text="Data matrícula">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <DatePicker prefHeight="30.0" prefWidth="177.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="121.0" prefWidth="343.0" spacing="70.0">
+                                             <children>
+                                                <Label text="RA">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField prefHeight="30.0" prefWidth="241.0">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="121.0" prefWidth="343.0" spacing="70.0">
+                                             <children>
+                                                <Label text="Turma">
+                                                   <font>
+                                                      <Font name="Arial" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox prefHeight="30.0" prefWidth="220.0" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                              <Label text="Contato">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox prefHeight="168.0" prefWidth="960.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Cod">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField prefHeight="30.0" prefWidth="46.0">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </TextField>
+                                    <VBox prefHeight="147.0" prefWidth="466.0" spacing="5.0">
+                                       <children>
+                                          <Label text="Descrição">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets left="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextArea prefHeight="111.0" prefWidth="456.0">
+                                             <VBox.margin>
+                                                <Insets left="10.0" />
+                                             </VBox.margin>
+                                          </TextArea>
+                                          <Label text="Contato">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets left="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextArea prefHeight="111.0" prefWidth="425.0">
+                                             <VBox.margin>
+                                                <Insets left="10.0" />
+                                             </VBox.margin>
+                                          </TextArea>
+                                       </children>
+                                    </VBox>
+                                    <AnchorPane prefHeight="147.0" prefWidth="384.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -114,6 +114,8 @@ public class DesmatricularAlunoViewController implements Initializable, DataChan
             Alerts.showAlert("Erro ao confimar", null, "Busque um aluno para ser desmatrículado", Alert.AlertType.ERROR);
         }
         try {
+            userConfirm();
+
             for (Aluno aluno : alunoService.findAll()) {
                 if (aluno.getId().equals(entityDto.getId())) {
                     int ID_PESSOA = aluno.getPessoa().getId();
@@ -159,6 +161,19 @@ public class DesmatricularAlunoViewController implements Initializable, DataChan
 
     public void subscribeDataChangedListener(DataChangedListener listener) {
         dataChangedListeners.add(listener);
+    }
+
+    private void userConfirm() {
+        ValidationException exception = new ValidationException("Validation exception");
+
+        if (txtEmailUsuario.getText() == null || txtEmailUsuario.getText().trim().equals("") ||
+            txtSenhaUsuario.getText() == null || txtSenhaUsuario.getText().trim().equals("")) {
+            exception.setErrors("txts", "E-mail ou senha incorretos");
+        }
+
+        if (exception.getErrors().size() > 0) {
+            throw exception;
+        }
     }
 
     private String generateQuerySearch() {
