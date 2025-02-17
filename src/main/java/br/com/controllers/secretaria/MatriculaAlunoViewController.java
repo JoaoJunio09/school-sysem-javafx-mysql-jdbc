@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,9 +28,7 @@ import jdk.jshell.execution.Util;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MatriculaAlunoViewController implements Initializable, DataChangedListener {
 
@@ -49,7 +48,7 @@ public class MatriculaAlunoViewController implements Initializable, DataChangedL
     private AnchorPane anchorPaneTableView;
 
     @FXML
-    private AnchorPane anchorPaneMatricular;
+    private AnchorPane anchorPaneAlterar;
 
     // Tabela - Aluno:
     @FXML
@@ -96,8 +95,18 @@ public class MatriculaAlunoViewController implements Initializable, DataChangedL
     private Button btHistórico;
 
     @FXML
-    public void onBtsLoadViewAluno(ActionEvent event) {
+    private Button btVoltar;
 
+    @FXML
+    public void onBtsLoadViewAluno(ActionEvent event) {
+        if (event.getSource() == btAlterar) {
+            anchorPaneTableView.setVisible(false);
+            anchorPaneAlterar.setVisible(true);
+        }
+        if (event.getSource() == btVoltar) {
+            anchorPaneTableView.setVisible(true);
+            anchorPaneAlterar.setVisible(false);
+        }
     }
 
     @FXML
@@ -131,7 +140,7 @@ public class MatriculaAlunoViewController implements Initializable, DataChangedL
             controller.loadAssociatedAllComboBox();
 
             Stage stageForm = new Stage();
-            stageForm.setTitle("Matricular novo aluno");
+            stageForm.setTitle("Dados do aluno");
             stageForm.setScene(new Scene(pane));
             stageForm.setResizable(false);
             stageForm.initModality(Modality.APPLICATION_MODAL);
@@ -253,7 +262,7 @@ public class MatriculaAlunoViewController implements Initializable, DataChangedL
         tableViewAluno.prefHeightProperty().bind(scrollPaneAluno.prefHeightProperty());
 
         anchorPaneTableView.setVisible(true);
-        anchorPaneMatricular.setVisible(false);
+        anchorPaneAlterar.setVisible(false);
     }
 
     @Override
